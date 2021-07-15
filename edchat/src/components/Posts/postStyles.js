@@ -1,11 +1,5 @@
-import React from 'react'
+const postStyles = {
 
-function postStyles() {
-    return (
-        <div>
-            test post
-        </div>
-    )
-}
+};
 
-export default postStyles
+export default postStyles;

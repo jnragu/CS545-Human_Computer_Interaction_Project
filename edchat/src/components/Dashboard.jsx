@@ -4,7 +4,7 @@ import { makeStyles } from '@material-ui/core';
 import Navbar from './Navbar/Navbar.jsx';
 import Courses from './Courses/Courses.jsx';
 import Posts from './Posts/Posts.jsx'
-
+import Buttons from './Buttons/Buttons.jsx'
 const useStyles = makeStyles(dashboardStyles);
 
 function Dashboard() {
@@ -14,7 +14,11 @@ function Dashboard() {
             <Navbar />
             <div style={{ display: 'flex', }}>
                 <Courses />
-                <Posts />
+                <div>
+                    <Buttons />
+                    <Posts />
+                </div>
+
             </div>
 
         </div>
