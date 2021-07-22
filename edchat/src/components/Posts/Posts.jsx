@@ -7,8 +7,8 @@ function Posts() {
     //Must handle promise. Ask joe for help with promises. 
     promise.then(function(AllPosts) {
         //This is an array of all questions in the database. 
-        //AllPosts.id is the auto-generated ID in the database. use this to index.
-        //AllPosts.data is the raw data.
+        //AllPosts[0].id is the auto-generated ID in the database. use this to index.
+        //AllPosts[0].data is the raw data.
         //Check browser console to see this printed to console. Also check PostFunctions.js for how these functions work. 
         console.log(AllPosts);
     });
