@@ -10,6 +10,9 @@ function Posts() {
         //AllPosts[0].id is the auto-generated ID in the database. use this to index.
         //AllPosts[0].data is the raw data.
         //Check browser console to see this printed to console. Also check PostFunctions.js for how these functions work. 
+
+        //Make sure you keep the id of every post stored somewhere. But only add the post.data attribute to the DOM
+        
         console.log(AllPosts);
     });
     return (
