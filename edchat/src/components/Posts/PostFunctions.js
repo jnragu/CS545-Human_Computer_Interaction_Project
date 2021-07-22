@@ -2,7 +2,7 @@ import firebase from 'firebase'
 
 //DONT DO THIS IN A REAL SCENARIO. This gives anyone full access to firebase console. Deploy an API to hide this logic instead. 
 const firebaseConfig = {
-    apiKey: "AIzaSyAnnZxuCx8dSwMCFzop8YqkVX96ZdTYwg8",
+    apiKey: "zbXQrqvl2K5WxfDCPPaskvhofCBP9RyizqGynrPC",
     authDomain: "cs545-project.firebaseapp.com",
     projectId: "cs545-project",
 };
