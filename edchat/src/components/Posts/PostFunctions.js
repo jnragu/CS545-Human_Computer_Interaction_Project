@@ -10,6 +10,8 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 
+//Returns an array of every post in the database.
+//Returns a promise of the data.
 async function GetAllPosts() {
     var posts = await db.collection("post").get();
     var AllPosts = []
@@ -23,6 +25,8 @@ async function GetAllPosts() {
     return AllPosts;
 }
 
+//id is the auto-generated ID of a post
+//response is just a string
 function Respond(id, response){
     var post = db.collection("post").doc(id);
 
@@ -31,6 +35,8 @@ function Respond(id, response){
     });
 }
 
+//Create a brand new question in the database.
+//Initialize responses to empty array.
 function AskQuestion(question){
     db.collection("post").add({
         "question": question,
