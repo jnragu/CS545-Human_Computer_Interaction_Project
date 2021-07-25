@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import { makeStyles, Button, TextField, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@material-ui/core';
 import courseStyle from './coursesStyle.js'
 import PersonAddOutlinedIcon from '@material-ui/icons/PersonAddOutlined';
+
+import { BrowserRouter as Router, Route, Link, Switch, } from "react-router-dom";
+
 const useStyles = makeStyles(courseStyle);
 
 function Courses() {
@@ -20,39 +23,50 @@ function Courses() {
     const courses = [
         {
             name: 'Computer Human Interaction',
-            section: 'CS-545-WS'
+            section: 'CS-545-WS',
+            path: '/CS-545-WS',
+            main: () => <h2>cs</h2>
         },
 
         {
             name: 'Thermodynamics',
-            section: 'E-234-A'
+            section: 'E-234-A',
+            path: '/E-234-A',
         },
         {
             name: 'Astronomy',
-            section: 'PEP-151-WS'
+            section: 'PEP-151-WS',
+            path: '/PEP-151-WS'
         },
         {
             name: 'Psychology of Prejudice',
-            section: 'HSS-333-A'
+            section: 'HSS-333-A',
+            path: '/HSS-333-A'
         },
         {
             name: 'Microprocessor Systems',
-            section: 'CPE-390-A'
+            section: 'CPE-390-A',
+            path: '/CPE-390-A'
         },
     ]
 
     return (
         <div style={{ width: '20vw', height: '100vh', borderRight: '1px solid #ECECEC' }}>
             <p style={{ textAlign: 'center', color: '#A3A3A3', marginBottom: '30px', fontSize: '13px', }}>Current courses ({courses.length})</p>
-            {courses.map((course, index) => (
-                <div key={index} className={classes.courses}>
-                    <li className={classes.point}></li>
-                    <div>
-                        <p className={classes.name}>{course.name}</p>
-                        <p className={classes.section}>{course.section}</p>
+            <Router>
+                {courses.map((course, index) => (
+
+                    <div key={index} className={classes.courses}>
+                        <li className={classes.point}></li>
+                        <div >
+                            <Link className={classes.name} to={course.path}>{course.name}</Link>
+                            <p className={classes.section}>{course.section}</p>
+                        </div>
                     </div>
-                </div>
-            ))}
+
+                ))}
+
+            </Router>
             <section className={classes.join}>
                 <Button className={classes.joinBtn} startIcon={<PersonAddOutlinedIcon />} onClick={handleClickOpen}>
                     Join A new class
