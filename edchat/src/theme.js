@@ -16,7 +16,7 @@ let theme = createTheme({
         },
         disabled: {
             main: '#C8C8C8'
-        }
+        },
     },
     typography: {
         htmlFontSize: 16,

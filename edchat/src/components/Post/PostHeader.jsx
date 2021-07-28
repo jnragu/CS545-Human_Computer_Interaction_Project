@@ -7,6 +7,9 @@ const useStyles = makeStyles(theme => ({
         direction: 'row',
         justifyContent: 'space-between',
         alignItems: 'flex-start'
+    },
+    tag: {
+        marginTop: '10px'
     }
 }))
 
@@ -22,8 +25,13 @@ export default function PostHeader(props) {
                 }
                 subheader = { props.author }
             />
-            <Button>
-                <Typography variant='subtitle1'>
+            <Button 
+                variant='contained' 
+                className={classes.tag} 
+                color='primary'
+                disableElevation
+            >
+                <Typography variant='action'>
                     Tag
                 </Typography>
             </Button>
