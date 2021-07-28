@@ -1,39 +1,53 @@
 import React from 'react'
-import navbarStyles from './navbarStyles.js';
-import { makeStyles, Button, IconButton } from '@material-ui/core';
-import logo from '../Icons/StevensLogo.png';
-import MagGlass from "../Icons/Mag.svg";
-import NotificationsNoneOutlinedIcon from '@material-ui/icons/NotificationsNoneOutlined';
-import PersonIcon from '@material-ui/icons/Person';
-const useStyles = makeStyles(navbarStyles);
+import { makeStyles, Container, AppBar, Typography, Toolbar, TextField, InputAdornment, Badge, Avatar, Grid } from '@material-ui/core'
+import { Search, Notifications, Person } from '@material-ui/icons'
+import logo from '../Icons/StevensLogo.png'
 
-function Navbar() {
+const useStyles = makeStyles( theme => ({
+    root: {
+        zIndex: theme.zIndex.drawer + 1,
+    },
+    title: {
+        marginLeft: '20px'
+    },
+    search: {
+        marginLeft: '60px'
+    },
+    actions: {
+        marginLeft: 'auto'
+    }
+}))
+
+export default function NavBar() {
     const classes = useStyles()
     return (
-        <div>
-            <nav className={classes.topnav} >
-                <div className={classes.title}>
-                    <img src={logo} alt="logo" className={classes.logo} />
-                    <Button style={{ textTransform: 'capitalize' }}>Stevens Institute of Technology</Button>
+        <AppBar postition='fixed' color='inherit' className={classes.root}>
+            <Toolbar>
+                <Avatar src={logo} />
+                <Typography variant='h2' className={classes.title}>   
+                    Stevens Institute of Technology
+                </Typography>
+                <TextField 
+                    variant='outlined'
+                    label='Tags'
+                    InputProps={{
+                    endAdornment: (
+                        <InputAdornment position='end'>
+                            <Search fontSize='small'/>
+                        </InputAdornment>
+                        )
+                    }}
+                    className={classes.search}
+                />
+                <div className={classes.actions}>
+                    <Badge badgeContent={1}>
+                        <Notifications />
+                    </Badge>
+                    <Badge>
+                        <Person />
+                    </Badge>  
                 </div>
-                <form action="/" className={classes.form}>
-                    <input type="text" placeholder="Type to search" className={classes.searchField} />
-                    <button type="submit" className={classes.searchButton}>
-                        <img src={MagGlass} alt="Mangifying Glass" />
-                    </button>
-                </form>
-                <div className={classes.Icons}>
-                    <IconButton style={{ color: '#AEAEAE' }} className={classes.Bell}>
-                        <NotificationsNoneOutlinedIcon />
-                    </IconButton>
-                    <IconButton style={{ color: '#AEAEAE' }} className={classes.userIcon}>
-                        <PersonIcon />
-                    </IconButton>
-                </div>
-
-            </nav>
-        </div>
+            </Toolbar>
+        </AppBar>
     )
 }
-
-export default Navbar

@@ -1,12 +1,16 @@
-import logo from './logo.svg';
-import './App.css';
-import Dashboard from './components/Dashboard.jsx'
+import React from 'react'
+import { ThemeProvider } from '@material-ui/styles';
+import { CssBaseline } from '@material-ui/core';
+import theme from './theme'
+import Dashboard  from './components/Dashboard/Dashboard'
 
-function App() {
+const App = () => {
   return (
-    <div>
-      <Dashboard />
-    </div>
+    <ThemeProvider theme = {theme}>
+      <CssBaseline>
+        <Dashboard />
+      </CssBaseline>
+    </ThemeProvider>
   );
 }
 
