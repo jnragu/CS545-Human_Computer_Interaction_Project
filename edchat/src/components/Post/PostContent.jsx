@@ -3,12 +3,12 @@ import { makeStyles, CardContent, Typography } from '@material-ui/core'
 
 const useStyles = makeStyles(theme => ({}))
 
-export default function PostContent() {
+export default function PostContent(props) {
     const classes = useStyles()
     return(
         <CardContent>
             <Typography component='p'>
-                This is the content of the post!
+                {props.content}
             </Typography>
         </CardContent>
     )

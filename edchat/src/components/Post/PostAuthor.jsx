@@ -20,7 +20,7 @@ const useStyles = makeStyles(theme => ({
     }
 }))
 
-export default function PostAuthor() {
+export default function PostAuthor(props) {
     const classes = useStyles()
     return (
         <Grid container className={classes.root}>
@@ -31,10 +31,10 @@ export default function PostAuthor() {
             </Grid>
             <Grid item>
                 <Typography variant='h2' className={classes.author}>
-                    Author
+                    {props.author}
                 </Typography>
                 <Typography variant='h3' className={classes.time}>
-                    Time posted
+                    {props.time}
                 </Typography>
             </Grid>
         </Grid>
