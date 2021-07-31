@@ -54,7 +54,6 @@ class Post extends React.Component {
     }
 
     render(){
-        let content = ''
     
         return (
             <Container className={{
@@ -62,7 +61,6 @@ class Post extends React.Component {
             }}>
                 <Card>
                     {this.state.content}
-                    
                 </Card>
             </Container>
         )
