@@ -20,7 +20,7 @@ export default function PostHeader(props) {
             <CardHeader 
                 title = {
                     <Typography variant='h1'>
-                        Title!
+                        {props.title}
                     </Typography>
                 }
                 subheader = { props.author }
