@@ -13,44 +13,25 @@ const useStyles = makeStyles(theme => ({
     },
 }))
 
-// export default function Post() {
-//     const promise = GetAllPosts();
 
-//     //Must handle promise. Ask joe for help with promises. 
-//     promise.then(function(AllPosts) {
-//         //This is an array of all questions in the database. 
-//         //AllPosts[0].id is the auto-generated ID in the database. use this to index.
-//         //AllPosts[0].data is the raw data.
-//         //Check browser console to see this printed to console. Also check PostFunctions.js for how these functions work. 
 
-//         //Make sure you keep the id of every post stored somewhere. But only add the post.data attribute to the DOM
-        
-//         for (var i = 0; i < AllPosts.length; i++){
-            
-//         }
-//         console.log(AllPosts)
-//     });
-
-//     const classes = useStyles()
-//     return (
-//         <Container className={classes.root}>
-//             <Card>
-//                 <PostHeader 
-//                     author= { <PostAuthor time="8/1/2020" author="Joe"/> } title="Example Title"
-//                 />
-//                 <PostContent content="Example Content"/>
-//                 <PostActions />
-                
-//             </Card>
-//         </Container>
-//     )
-// }
 class Post extends React.Component {
     constructor(){
         super();
         this.state = {
             content: 'Loading'
         }
+    }
+
+    MakePost(post){
+        const id = post.id;
+        const question = post.data.question;
+        const content = post.data.content;
+        return <div>
+                    <PostHeader author= { <PostAuthor time="8/1/2020" author="Joe"/> } title={question}/>
+                    <PostContent content={content}/>
+                    <PostActions />
+                </div>;
     }
 
     componentWillMount() {
@@ -61,13 +42,14 @@ class Post extends React.Component {
             //AllPosts[0].id is the auto-generated ID in the database. use this to index.
             //AllPosts[0].data is the raw data.
             //Check browser console to see this printed to console. Also check PostFunctions.js for how these functions work. 
-
             //Make sure you keep the id of every post stored somewhere. But only add the post.data attribute to the DOM
             
+            var rows = [];
             for (var i = 0; i < AllPosts.length; i++){
-                
+                rows.push(this.MakePost(AllPosts[i]))
             }
-            this.setState({content: AllPosts[0].id});
+            console.log(AllPosts[0])
+            this.setState({content: rows});
         }.bind(this));
     }
 
@@ -79,11 +61,7 @@ class Post extends React.Component {
                 maxWidth: 'sm'
             }}>
                 <Card>
-                    <PostHeader 
-                        author= { <PostAuthor time="8/1/2020" author="Joe"/> } title="Example Title"
-                    />
-                    <PostContent content={this.state.content}/>
-                    <PostActions />
+                    {this.state.content}
                     
                 </Card>
             </Container>
