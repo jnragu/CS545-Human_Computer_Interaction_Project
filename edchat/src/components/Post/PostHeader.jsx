@@ -31,7 +31,7 @@ export default function PostHeader(props) {
                 color='primary'
                 disableElevation
             >
-                <Typography variant='action'>
+                <Typography variant='button'>
                     Tag
                 </Typography>
             </Button>

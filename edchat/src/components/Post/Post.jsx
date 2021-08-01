@@ -1,19 +1,18 @@
 import React from 'react'
 import { Container, Grid, Card, CardHeader, CardContent, CardActions, Typography, Avatar, Button } from '@material-ui/core'
-import { makeStyles } from '@material-ui/core/styles'
+import { withStyles } from '@material-ui/styles';
 import PostHeader from './PostHeader'
 import PostAuthor from './PostAuthor'
 import PostContent from './PostContent'
 import PostActions from './PostActions'
 import {AskQuestion, Respond, GetAllPosts} from './PostFunctions.js'
 
-const useStyles = makeStyles(theme => ({
+const styles = theme => ({
     root: {
-        maxWidth: 'sm'
-    },
-}))
-
-
+        maxWidth: 'sm',
+        listStyleType: 'none'
+    }
+})
 
 class Post extends React.Component {
     constructor(){
@@ -24,12 +23,12 @@ class Post extends React.Component {
     }
 
     MakePost(post){
-        const id = post.id;
-        const question = post.data.question;
-        const content = post.data.content;
+        // TODO
+        // Add responses to question's content. 
+        // New React Component?
         return <div>
-                    <PostHeader author= { <PostAuthor time="8/1/2020" author="Joe"/> } title={question}/>
-                    <PostContent content={content}/>
+                    <PostHeader author= { <PostAuthor time="8/1/2020" author="Joe"/> } title={post.data.question}/>
+                    <PostContent content={post.data.content}/>
                     <PostActions />
                 </div>;
     }
@@ -37,16 +36,16 @@ class Post extends React.Component {
     componentWillMount() {
         const promise = GetAllPosts();
         
-        promise.then(function(AllPosts) {
-            //This is an array of all questions in the database. 
-            //AllPosts[0].id is the auto-generated ID in the database. use this to index.
-            //AllPosts[0].data is the raw data.
-            //Check browser console to see this printed to console. Also check PostFunctions.js for how these functions work. 
-            //Make sure you keep the id of every post stored somewhere. But only add the post.data attribute to the DOM
-            
+        //Promise is binded to this class so it can have scope of this.state
+        promise.then(function(AllPosts) {          
             var rows = [];
+
             for (var i = 0; i < AllPosts.length; i++){
-                rows.push(this.MakePost(AllPosts[i]))
+                const post = this.MakePost(AllPosts[i]);
+                const elm = <li key={AllPosts[i].id}>
+                                {post}
+                            </li>
+                rows.push(elm)
             }
             console.log(AllPosts[0])
             this.setState({content: rows});
@@ -54,11 +53,9 @@ class Post extends React.Component {
     }
 
     render(){
-    
+        const { classes } = this.props;
         return (
-            <Container className={{
-                maxWidth: 'sm'
-            }}>
+            <Container className={classes.root}>
                 <Card>
                     {this.state.content}
                 </Card>
@@ -66,4 +63,4 @@ class Post extends React.Component {
         )
     }
 }
-export default Post;
+export default withStyles(styles)(Post);
