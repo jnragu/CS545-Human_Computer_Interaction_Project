@@ -1,6 +1,8 @@
 import React from 'react'
-import { makeStyles, CardActions, Button, Typography } from '@material-ui/core'
+import { makeStyles, CardActions, Button, Typography, Accordion, AccordionDetails, AccordionSummary } from '@material-ui/core'
 import { Bookmark, ChatBubbleRounded } from '@material-ui/icons'
+import Response from './Response'
+import PostAuthor from './PostAuthor'
 
 const useStyles = makeStyles(theme => ({
     responses: {
@@ -16,27 +18,43 @@ const useStyles = makeStyles(theme => ({
 export default function PostActions() {
     const classes = useStyles()
     return(
-        <CardActions disableSpacing>
-            <Button 
-                startIcon={<Bookmark color='disabled'/>}
-                variant='contained'
-                color='secondary'
-                disableElevation
-                className={classes.bookmark}
+        <Accordion>
+            <AccordionSummary
+                aria-label='Expand'
             >
-                Bookmark
-            </Button>
-            <Button 
-                startIcon={<ChatBubbleRounded color='disabled'/>}
-                variant='contained'
-                color='secondary'
-                disableElevation
-            >
-                Add Reponse
-            </Button>
-            <Typography variant='button' className={classes.responses}>
-                Number of responses
-            </Typography>
-        </CardActions>
+                <CardActions>
+                    <Button 
+                        aria-label='Bookmark'
+                        startIcon={<Bookmark color='disabled'/>}
+                        variant='contained'
+                        color='secondary'
+                        disableElevation
+                        className={classes.bookmark}
+                        onClick={(event) => event.stopPropagation()}
+                        onFocus={(event) => event.stopPropagation()}
+                    >
+                        Bookmark
+                    </Button>
+                    <Button 
+                        aria-label='AddResponse'
+                        startIcon={<ChatBubbleRounded color='disabled'/>}
+                        variant='contained'
+                        color='secondary'
+                        disableElevation
+                        onClick={(event) => event.stopPropagation()}
+                        onFocus={(event) => event.stopPropagation()}
+                    >
+                        Add Response
+                    </Button>
+                    <Typography variant='button' className={classes.responses}>
+                        View # of responses
+                    </Typography>
+                </CardActions>
+            </AccordionSummary>
+            <AccordionDetails>
+                <Response />
+            </AccordionDetails>
+        </Accordion>
+        
     )
 }

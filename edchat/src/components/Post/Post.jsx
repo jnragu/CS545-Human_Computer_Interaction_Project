@@ -1,11 +1,12 @@
 import React from 'react'
-import { Container, Grid, Card, CardHeader, CardContent, CardActions, Typography, Avatar, Button } from '@material-ui/core'
+import { Container, Card, Accordion } from '@material-ui/core'
 import { withStyles } from '@material-ui/styles';
 import PostHeader from './PostHeader'
 import PostAuthor from './PostAuthor'
 import PostContent from './PostContent'
 import PostActions from './PostActions'
-import {AskQuestion, Respond, GetAllPosts} from './PostFunctions.js'
+import { AskQuestion , Respond, GetAllPosts } from './PostFunctions.js'
+import Responses from './Response'
 
 const styles = theme => ({
     root: {

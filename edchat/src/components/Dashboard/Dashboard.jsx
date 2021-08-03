@@ -1,6 +1,6 @@
 import React from 'react'
 import { makeStyles, Container, Toolbar, Button } from '@material-ui/core'
-import NavBar from '../Navbar/Navbar'
+import NavBar from '../NavBar/NavBar'
 import SideBar from '../SideBar/SideBar'
 import Post from '../Post/Post'
 import ContentActions from '../ContentActions/ContentActions'
