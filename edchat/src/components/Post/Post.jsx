@@ -47,7 +47,7 @@ class Post extends React.Component {
                             </li>
                 rows.push(elm)
             }
-            console.log(AllPosts[0])
+            
             this.setState({content: rows});
         }.bind(this));
     }
