@@ -1,5 +1,15 @@
 import React from 'react'
-import { makeStyles, CardActions, Button, Typography, Accordion, AccordionDetails, AccordionSummary } from '@material-ui/core'
+import 
+    { makeStyles, 
+        CardActions, 
+        Button, 
+        Typography, 
+        Accordion, 
+        AccordionDetails, 
+        AccordionSummary, 
+        TextField, 
+        AccordionActions,
+    } from '@material-ui/core'
 import { Bookmark, ChatBubbleRounded } from '@material-ui/icons'
 import Response from './Response'
 import PostAuthor from './PostAuthor'
@@ -12,6 +22,9 @@ const useStyles = makeStyles(theme => ({
     bookmark: {
         marginLeft: '40px',
         marginRight: '15px',
+    },
+    responses: {
+
     }
 }))
 
@@ -54,6 +67,16 @@ export default function PostActions() {
             <AccordionDetails>
                 <Response />
             </AccordionDetails>
+            <AccordionActions>
+                <TextField
+                    variant='outlined'
+                />
+                <Button
+                    variant='secondary'
+                >
+                    Post Response
+                </Button>
+            </AccordionActions>
         </Accordion>
         
     )
