@@ -1,8 +1,9 @@
-import React from 'react'
-import { makeStyles, Button, Grid, TextField, InputAdornment } from '@material-ui/core'
+import React, { Component } from 'react'
+import { makeStyles, Button, Grid, TextField, InputAdornment, Popover } from '@material-ui/core'
 import { Search, AddBox } from '@material-ui/icons'
+import PopupState, { bindTrigger, bindPopover } from 'material-ui-popup-state'
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles( theme => ({
     root: {
         direction: 'row',
         justifyContent: 'flex-start',
@@ -11,14 +12,15 @@ const useStyles = makeStyles(theme => ({
 }))
 
 export default function ContentActions() {
-    const classes = useStyles()
+    const classes = useStyles() 
     return(
         <Grid container className={classes.root}>
             <Grid item>
-                <Button
+                <Button 
                     startIcon={<AddBox />}
                     variant='contained'
                     color='primary'
+                    onClick={this.onTrigger}
                 >
                     Ask a Question
                 </Button>
