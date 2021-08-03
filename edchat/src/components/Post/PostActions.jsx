@@ -6,8 +6,7 @@ import PostAuthor from './PostAuthor'
 
 const useStyles = makeStyles(theme => ({
     responses: {
-        marginLeft: 'auto',
-        marginRight: '10px'
+        listStyleType: 'none'
     },
     bookmark: {
         marginLeft: '40px',
@@ -15,8 +14,19 @@ const useStyles = makeStyles(theme => ({
     }
 }))
 
-export default function PostActions() {
-    const classes = useStyles()
+export default function PostActions(props) {
+    const classes = useStyles();
+    const responses = props.responses;
+
+    var rows = [];
+
+    for (var i = 0; i < responses.length; i++){
+        const post = <Response author="Joe" content={responses[i]}/>
+        const elm = <li className={classes.responses}>
+                        {post}
+                    </li>
+        rows.push(elm)
+    }
     return(
         <Accordion>
             <AccordionSummary
@@ -52,7 +62,9 @@ export default function PostActions() {
                 </CardActions>
             </AccordionSummary>
             <AccordionDetails>
-                <Response />
+                <ul>
+                    {rows}
+                </ul>
             </AccordionDetails>
         </Accordion>
         

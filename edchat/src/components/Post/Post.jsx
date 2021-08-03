@@ -6,7 +6,6 @@ import PostAuthor from './PostAuthor'
 import PostContent from './PostContent'
 import PostActions from './PostActions'
 import { AskQuestion , Respond, GetAllPosts } from './PostFunctions.js'
-import Responses from './Response'
 
 const styles = theme => ({
     root: {
@@ -31,7 +30,7 @@ class Post extends React.Component {
         return <div>
                     <PostHeader author= { <PostAuthor time={date} author="Joe"/> } title={post.data.question}/>
                     <PostContent content={post.data.content}/>
-                    <PostActions />
+                    <PostActions responses={post.data.responses}/>
                 </div>;
     }
 

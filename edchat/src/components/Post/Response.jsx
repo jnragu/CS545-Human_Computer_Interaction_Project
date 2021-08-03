@@ -5,12 +5,12 @@ import PostContent from './PostContent'
 
 const useStyles = makeStyles(theme => ({}))
 
-export default function Response() {
+export default function Response(props) {
     const classes = useStyles()
     return(
         <div>
-            <PostAuthor author='Name of Author'/>
-            <PostContent content='Content here!!!!!!/dkjafsajdshkflj' />
+            <PostAuthor author={props.author}/>
+            <PostContent content={props.content} />
         </div>
     )
 }
