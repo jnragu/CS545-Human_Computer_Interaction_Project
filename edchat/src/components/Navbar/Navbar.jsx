@@ -1,7 +1,19 @@
-import React from 'react'
-import { makeStyles, Container, AppBar, Typography, Toolbar, TextField, InputAdornment, Badge, Avatar, Grid } from '@material-ui/core'
+import React, { useState } from 'react'
+import { 
+        makeStyles,
+        Typography, 
+        Toolbar, 
+        TextField, 
+        InputAdornment, 
+        Badge, 
+        Avatar, 
+        Popover,
+        AppBar,
+        IconButton
+    } from '@material-ui/core'
 import { Search, Notifications, Person } from '@material-ui/icons'
 import logo from '../Icons/StevensLogo.png'
+import Notification from '../Notification/Notification'
 
 const useStyles = makeStyles( theme => ({
     root: {
@@ -20,6 +32,19 @@ const useStyles = makeStyles( theme => ({
 
 export default function NavBar() {
     const classes = useStyles()
+    const [anchorEl, setAnchorEl] = useState(null)
+
+    const handleClick = (event) => {
+        setAnchorEl(event.currentTarget)
+    }
+    
+    const handleClose = () => {
+        setAnchorEl(null)
+    }
+
+    const open = Boolean(anchorEl)
+    const id = open ? 'notification-popover' : undefined 
+
     return (
         <AppBar postition='fixed' color='inherit' className={classes.root}>
             <Toolbar>
@@ -40,12 +65,32 @@ export default function NavBar() {
                     className={classes.search}
                 />
                 <div className={classes.actions}>
-                    <Badge badgeContent={1}>
-                        <Notifications />
-                    </Badge>
+                    <IconButton
+                        onClick={handleClick}
+                    >
+                        <Badge badgeContent={1}>
+                            <Notifications />
+                        </Badge>
+                    </IconButton>
+                    <Popover
+                        id={id}
+                        open={open}
+                        anchorEl={anchorEl}
+                        onClose={handleClose}
+                        anchorOrigin={{
+                            vertical: 'bottom', 
+                            horizontal: 'center',
+                        }}
+                        transformOrigin={{
+                            vertical: 'top',
+                            horizontal: 'center',
+                        }}
+                    >
+                        <Notification />
+                    </Popover>
                     <Badge>
                         <Person />
-                    </Badge>  
+                    </Badge> 
                 </div>
             </Toolbar>
         </AppBar>
