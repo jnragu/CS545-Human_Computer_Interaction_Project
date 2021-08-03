@@ -26,8 +26,9 @@ class Post extends React.Component {
         // TODO
         // Add responses to question's content. 
         // New React Component?
+        var date = new Date(post.data.date).toLocaleString('en-US', { year: 'numeric', month: 'long', day: 'numeric', hour12: true, hour: "numeric", minute: "numeric"});
         return <div>
-                    <PostHeader author= { <PostAuthor time="8/1/2020" author="Joe"/> } title={post.data.question}/>
+                    <PostHeader author= { <PostAuthor time={date} author="Joe"/> } title={post.data.question}/>
                     <PostContent content={post.data.content}/>
                     <PostActions />
                 </div>;
@@ -38,6 +39,9 @@ class Post extends React.Component {
         
         //Promise is binded to this class so it can have scope of this.state
         promise.then(function(AllPosts) {          
+            
+            AllPosts.sort((a, b) => (a.data.date > b.data.date) ? 1 : -1)
+            
             var rows = [];
 
             for (var i = 0; i < AllPosts.length; i++){

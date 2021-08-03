@@ -21,8 +21,12 @@ export default function AskAQuestion() {
             console.log("Error: missing value for Asking a question");
         }
         else {
-            AskQuestion(title, content);
-            window.location.reload();
+            var date = new Date().getTime()
+
+            var res = AskQuestion(title, content, date);
+            res.then(function () {
+                window.location.reload();
+            });
         }
         
     }

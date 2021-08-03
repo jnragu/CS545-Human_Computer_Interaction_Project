@@ -37,12 +37,14 @@ function Respond(id, response){
 
 //Create a brand new question in the database.
 //Initialize responses to empty array.
-function AskQuestion(question, content){
-    db.collection("post").add({
+function AskQuestion(question, content, date){
+    var response = db.collection("post").add({
         "question": question,
         "content": content,
+        "date": date,
         "responses": [] 
     });
+    return response;
 }
 
 export {GetAllPosts, AskQuestion, Respond}
