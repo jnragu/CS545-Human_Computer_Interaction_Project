@@ -1,18 +1,31 @@
-import React, { Component } from 'react'
-import { makeStyles, Button, Grid, TextField, InputAdornment, Popover } from '@material-ui/core'
+import React, { Component, useState } from 'react'
+import { makeStyles, Button, Grid, TextField, InputAdornment, Popover, Typography } from '@material-ui/core'
 import { Search, AddBox } from '@material-ui/icons'
-import PopupState, { bindTrigger, bindPopover } from 'material-ui-popup-state'
+import AskAQuestion from './AskAQuestion'
 
 const useStyles = makeStyles( theme => ({
     root: {
         direction: 'row',
         justifyContent: 'flex-start',
-        alignItems: 'flex-start'
-    }
+        alignItems: 'flex-start',
+    },
 }))
 
 export default function ContentActions() {
     const classes = useStyles() 
+    const [anchorEl, setAnchorEl] = useState(null)
+
+    const handleClick = (event) => {
+        setAnchorEl(event.currentTarget)
+    }
+
+    const handleClose = () => {
+        setAnchorEl(null)
+    }
+
+    const open = Boolean(anchorEl)
+    const id = open ? 'simple-popover' : undefined
+
     return(
         <Grid container className={classes.root}>
             <Grid item>
@@ -20,10 +33,26 @@ export default function ContentActions() {
                     startIcon={<AddBox />}
                     variant='contained'
                     color='primary'
-                    onClick={this.onTrigger}
+                    onClick={handleClick}
                 >
                     Ask a Question
                 </Button>
+                <Popover
+                    id={id}
+                    open={open}
+                    anchorEl={anchorEl}
+                    onClose={handleClose}
+                    anchorOrigin={{
+                        vertical: 'bottom',
+                        horizontal: 'center',
+                    }}
+                    transformOrigin={{
+                        vertical: 'top',
+                        horizontal: 'center',
+                    }}
+                >
+                    <AskAQuestion />
+                </Popover>
             </Grid>
             <Grid item>
                 <TextField 
