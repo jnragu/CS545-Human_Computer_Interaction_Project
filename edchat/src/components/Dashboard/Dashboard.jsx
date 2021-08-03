@@ -1,6 +1,6 @@
 import React from 'react'
-import { makeStyles, Container, Toolbar } from '@material-ui/core'
-import NavBar from '../NavBar/NavBar'
+import { makeStyles, Container, Toolbar, Button } from '@material-ui/core'
+import NavBar from '../Navbar/Navbar'
 import SideBar from '../SideBar/SideBar'
 import Post from '../Post/Post'
 import ContentActions from '../ContentActions/ContentActions'
@@ -20,7 +20,7 @@ const useStyles = makeStyles( theme => ({
 
 
 export default function Dashboard() {
-    const classes = useStyles() 
+    const classes = useStyles()
 
         return (
             <Container className={classes.root}>
@@ -33,5 +33,5 @@ export default function Dashboard() {
                 </main>
             </Container>
         )
-    
+
 }
