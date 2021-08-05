@@ -9,7 +9,7 @@ const useStyles = makeStyles(theme => ({
     drawer: {
         width: drawerWidth,
         flexShrink: 0,
-      },
+    },
     drawerPaper: {
         width: drawerWidth,
     },
@@ -20,7 +20,7 @@ const useStyles = makeStyles(theme => ({
     },
     drawerTitle: {
         margin: '20px'
-    }, 
+    },
     action: {
         marginLeft: '50px'
     }
@@ -29,8 +29,8 @@ const useStyles = makeStyles(theme => ({
 
 export default function PostContent() {
     const classes = useStyles()
-    return(
-        <Drawer 
+    return (
+        <Drawer
             className={classes.drawer}
             variant='permanent'
             anchor='left'
@@ -43,16 +43,16 @@ export default function PostContent() {
                 <Typography variant='h2' className={classes.drawerTitle}>
                     Current Courses (5)
                 </Typography>
-                <SideBarItem 
-                    class='Human Computer Interaction' 
+                <SideBarItem
+                    class='Human Computer Interaction'
                     classid='CS-545-WS'
                 />
                 <SideBarItem class='Thermodynamics' classid='E-234-A' />
-                <SideBarItem class='Astronomy' classid='PEP-161-WS' />
+                <SideBarItem class='Astronomy' classid='PEP-151-WS' />
                 <SideBarItem class='Psychology of Prejudice' classid='HSS-333-A' />
-                <Button 
-                    variant='contained' 
-                    color='primary' 
+                <Button
+                    variant='contained'
+                    color='primary'
                     startIcon={<PersonAdd />}
                     className={classes.action}
                 >
