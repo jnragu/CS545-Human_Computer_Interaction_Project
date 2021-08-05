@@ -1,5 +1,5 @@
 import React from 'react'
-import { makeStyles, CardActions, Button, Typography, Accordion, AccordionDetails, AccordionSummary } from '@material-ui/core'
+import { makeStyles, CardActions, Button, Typography, Accordion, AccordionDetails, AccordionSummary, AccordionActions, TextField } from '@material-ui/core'
 import { Bookmark, ChatBubbleRounded } from '@material-ui/icons'
 import Response from './Response'
 import PostAuthor from './PostAuthor'
@@ -68,6 +68,12 @@ export default function PostActions(props) {
                     {rows}
                 </ul>
             </AccordionDetails>
+            <AccordionActions>
+                <TextField id='response' variant='outlined' />
+                <Button variant='secondary'>
+                    Post Response
+                </Button>
+            </AccordionActions>
         </Accordion>
         
     )

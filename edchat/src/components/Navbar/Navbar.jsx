@@ -30,7 +30,7 @@ const useStyles = makeStyles( theme => ({
     }
 }))
 
-export default function NavBar() {
+export default function Navbar() {
     const classes = useStyles()
     const [anchorEl, setAnchorEl] = useState(null)
 
