@@ -30,9 +30,10 @@ async function GetAllPosts() {
 function Respond(id, response){
     var post = db.collection("post").doc(id);
 
-    post.update({
+    var res = post.update({
         responses: firebase.firestore.FieldValue.arrayUnion(response)
     });
+    return res;
 }
 
 //Create a brand new question in the database.

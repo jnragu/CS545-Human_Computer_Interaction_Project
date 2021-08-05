@@ -30,7 +30,7 @@ class Post extends React.Component {
         return <div>
                     <PostHeader author= { <PostAuthor time={date} author="Joe"/> } title={post.data.question}/>
                     <PostContent content={post.data.content}/>
-                    <PostActions responses={post.data.responses}/>
+                    <PostActions responses={post.data.responses} postid={post.id}/>
                 </div>;
     }
 
@@ -40,7 +40,7 @@ class Post extends React.Component {
         //Promise is binded to this class so it can have scope of this.state
         promise.then(function(AllPosts) {          
             
-            AllPosts.sort((a, b) => (a.data.date > b.data.date) ? 1 : -1)
+            AllPosts.sort((a, b) => (a.data.date < b.data.date) ? 1 : -1)
             
             var rows = [];
 

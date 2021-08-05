@@ -3,6 +3,7 @@ import { makeStyles, CardActions, Button, Typography, Accordion, AccordionDetail
 import { Bookmark, ChatBubbleRounded } from '@material-ui/icons'
 import Response from './Response'
 import PostAuthor from './PostAuthor'
+import {Respond} from './PostFunctions.js'
 
 const useStyles = makeStyles(theme => ({
     responses: {
@@ -17,6 +18,21 @@ const useStyles = makeStyles(theme => ({
 }))
 
 export default function PostActions(props) {
+    var response = ""
+
+    const RespondToPost = function(event) {
+        console.log(props.postid);
+        console.log(response);
+        var promise = Respond(props.postid, response);
+
+        promise.then(function(){
+            window.location.reload();
+        })
+    }
+
+    const handleChangeResponse = function(event) {
+        response = event.target.value;
+    }
     const classes = useStyles();
     const responses = props.responses;
 
@@ -69,8 +85,8 @@ export default function PostActions(props) {
                 </ul>
             </AccordionDetails>
             <AccordionActions>
-                <TextField id='response' variant='outlined' />
-                <Button variant='secondary'>
+                <TextField id='response' variant='outlined' onChange={handleChangeResponse}/>
+                <Button variant='secondary' onClick={RespondToPost}>
                     Post Response
                 </Button>
             </AccordionActions>
