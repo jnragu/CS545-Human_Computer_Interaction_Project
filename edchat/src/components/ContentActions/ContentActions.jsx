@@ -3,7 +3,7 @@ import { makeStyles, Button, Grid, TextField, InputAdornment, Popover, Typograph
 import { Search, AddBox } from '@material-ui/icons'
 import AskAQuestion from './AskAQuestion'
 
-const useStyles = makeStyles( theme => ({
+const useStyles = makeStyles(theme => ({
     root: {
         direction: 'row',
         justifyContent: 'flex-start',
@@ -12,7 +12,7 @@ const useStyles = makeStyles( theme => ({
 }))
 
 export default function ContentActions() {
-    const classes = useStyles() 
+    const classes = useStyles()
     const [anchorEl, setAnchorEl] = useState(null)
 
     const handleClick = (event) => {
@@ -26,10 +26,10 @@ export default function ContentActions() {
     const open = Boolean(anchorEl)
     const id = open ? 'simple-popover' : undefined
 
-    return(
+    return (
         <Grid container className={classes.root}>
             <Grid item>
-                <Button 
+                <Button
                     startIcon={<AddBox />}
                     variant='contained'
                     color='primary'
@@ -55,13 +55,13 @@ export default function ContentActions() {
                 </Popover>
             </Grid>
             <Grid item>
-                <TextField 
+                <TextField
                     variant='outlined'
                     label='Tags'
                     InputProps={{
                         startAdornment: (
                             <InputAdornment position='start'>
-                                <Search fontSize='small'/>
+                                <Search fontSize='small' />
                             </InputAdornment>
                         )
                     }}
