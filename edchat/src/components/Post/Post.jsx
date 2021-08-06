@@ -5,65 +5,69 @@ import PostHeader from './PostHeader'
 import PostAuthor from './PostAuthor'
 import PostContent from './PostContent'
 import PostActions from './PostActions'
-import { AskQuestion , Respond, GetAllPosts } from './PostFunctions.js'
+import { AskQuestion, Respond, GetAllPosts } from './PostFunctions.js'
 
 const styles = theme => ({
     root: {
         maxWidth: 'sm',
-        listStyleType: 'none'
+        listStyleType: 'none',
     }
 })
 
 class Post extends React.Component {
-    constructor(){
+    constructor() {
         super();
         this.state = {
             content: 'Loading'
         }
     }
 
-    MakePost(post){
+    MakePost(post) {
         // TODO
         // Add responses to question's content. 
         // New React Component?
-        var date = new Date(post.data.date).toLocaleString('en-US', { year: 'numeric', month: 'long', day: 'numeric', hour12: true, hour: "numeric", minute: "numeric"});
+        var date = new Date(post.data.date).toLocaleString('en-US', { year: 'numeric', month: 'long', day: 'numeric', hour12: true, hour: "numeric", minute: "numeric" });
         return <div>
-                    <PostHeader author= { <PostAuthor time={date} author="Joe"/> } title={post.data.question}/>
-                    <PostContent content={post.data.content}/>
-                    <PostActions responses={post.data.responses} postid={post.id}/>
-                </div>;
+            <PostHeader author={<PostAuthor time={date} author="Joe" />} title={post.data.question} />
+            <PostContent content={post.data.content} />
+            <PostActions responses={post.data.responses} postid={post.id} />
+        </div>;
     }
 
     componentWillMount() {
         const promise = GetAllPosts();
-        
+
         //Promise is binded to this class so it can have scope of this.state
-        promise.then(function(AllPosts) {          
-            
+        promise.then(function (AllPosts) {
+
             AllPosts.sort((a, b) => (a.data.date < b.data.date) ? 1 : -1)
-            
+
             var rows = [];
 
-            for (var i = 0; i < AllPosts.length; i++){
+            for (var i = 0; i < AllPosts.length; i++) {
                 const post = this.MakePost(AllPosts[i]);
-                const elm = <li key={AllPosts[i].id}>
-                                {post}
-                            </li>
+                const elm =
+                    <li key={AllPosts[i].id} >
+                        {post}
+                    </li>
                 rows.push(elm)
+
             }
-            
-            this.setState({content: rows});
+
+            this.setState({ content: rows });
         }.bind(this));
     }
 
-    render(){
+    render() {
         const { classes } = this.props;
         return (
-            <Container className={classes.root}>
-                <Card>
-                    {this.state.content}
-                </Card>
-            </Container>
+            <div>
+                <Container className={classes.root}>
+                    <Card>
+                        {this.state.content}
+                    </Card>
+                </Container>
+            </div>
         )
     }
 }

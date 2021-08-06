@@ -6,7 +6,7 @@ const useStyles = makeStyles(theme => ({
     root: {
         direction: 'row',
         justifyContent: 'space-between',
-        alignItems: 'flex-start'
+        alignItems: 'flex-start',
     },
     tag: {
         marginTop: '10px'
@@ -15,19 +15,19 @@ const useStyles = makeStyles(theme => ({
 
 export default function PostHeader(props) {
     const classes = useStyles()
-    return(
+    return (
         <Grid container className={classes.root}>
-            <CardHeader 
-                title = {
+            <CardHeader
+                title={
                     <Typography variant='h1'>
                         {props.title}
                     </Typography>
                 }
-                subheader = { props.author }
+                subheader={props.author}
             />
-            <Button 
-                variant='contained' 
-                className={classes.tag} 
+            <Button
+                variant='contained'
+                className={classes.tag}
                 color='primary'
                 disableElevation
             >

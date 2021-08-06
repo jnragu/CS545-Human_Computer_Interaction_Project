@@ -1,21 +1,21 @@
 import React, { useState } from 'react'
-import { 
-        makeStyles,
-        Typography, 
-        Toolbar, 
-        TextField, 
-        InputAdornment, 
-        Badge, 
-        Avatar, 
-        Popover,
-        AppBar,
-        IconButton
-    } from '@material-ui/core'
+import {
+    makeStyles,
+    Typography,
+    Toolbar,
+    TextField,
+    InputAdornment,
+    Badge,
+    Avatar,
+    Popover,
+    AppBar,
+    IconButton
+} from '@material-ui/core'
 import { Search, Notifications, Person } from '@material-ui/icons'
 import logo from '../Icons/StevensLogo.png'
 import Notification from '../Notification/Notification'
 
-const useStyles = makeStyles( theme => ({
+const useStyles = makeStyles(theme => ({
     root: {
         zIndex: theme.zIndex.drawer + 1,
     },
@@ -37,29 +37,29 @@ export default function Navbar() {
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget)
     }
-    
+
     const handleClose = () => {
         setAnchorEl(null)
     }
 
     const open = Boolean(anchorEl)
-    const id = open ? 'notification-popover' : undefined 
+    const id = open ? 'notification-popover' : undefined
 
     return (
         <AppBar postition='fixed' color='inherit' className={classes.root}>
             <Toolbar>
                 <Avatar src={logo} />
-                <Typography variant='h2' className={classes.title}>   
+                <Typography variant='h2' className={classes.title}>
                     Stevens Institute of Technology
                 </Typography>
-                <TextField 
+                <TextField
                     variant='outlined'
                     label='Tags'
                     InputProps={{
-                    endAdornment: (
-                        <InputAdornment position='end'>
-                            <Search fontSize='small'/>
-                        </InputAdornment>
+                        endAdornment: (
+                            <InputAdornment position='end'>
+                                <Search fontSize='small' />
+                            </InputAdornment>
                         )
                     }}
                     className={classes.search}
@@ -68,7 +68,7 @@ export default function Navbar() {
                     <IconButton
                         onClick={handleClick}
                     >
-                        <Badge badgeContent={1}>
+                        <Badge badgeContent={1} color="primary">
                             <Notifications />
                         </Badge>
                     </IconButton>
@@ -78,7 +78,7 @@ export default function Navbar() {
                         anchorEl={anchorEl}
                         onClose={handleClose}
                         anchorOrigin={{
-                            vertical: 'bottom', 
+                            vertical: 'bottom',
                             horizontal: 'center',
                         }}
                         transformOrigin={{
@@ -90,7 +90,7 @@ export default function Navbar() {
                     </Popover>
                     <Badge>
                         <Person />
-                    </Badge> 
+                    </Badge>
                 </div>
             </Toolbar>
         </AppBar>
