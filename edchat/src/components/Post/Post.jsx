@@ -47,7 +47,7 @@ class Post extends React.Component {
             for (var i = 0; i < AllPosts.length; i++) {
                 const post = this.MakePost(AllPosts[i]);
                 const elm =
-                    <li key={AllPosts[i].id} >
+                    <li key={AllPosts[i].id}>
                         {post}
                     </li>
                 rows.push(elm)

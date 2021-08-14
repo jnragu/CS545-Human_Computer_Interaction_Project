@@ -1,8 +1,13 @@
 import React, { useState } from 'react'
 import { makeStyles, Card, CardHeader, TextField, CardContent, Button, CardActions } from '@material-ui/core'
-import {AskQuestion} from '../Post/PostFunctions.js'
+import { AskQuestion } from '../Post/PostFunctions.js'
 
-const useStyles = makeStyles(theme => ({}))
+const useStyles = makeStyles(theme => ({
+    root: {
+        width: '500px'
+    }
+
+}))
 
 export default function AskAQuestion() {
     //used to store Title and Content
@@ -16,8 +21,8 @@ export default function AskAQuestion() {
         setContentValue(event.target.value)
     }
 
-    const handleClick = function(event) {
-        if (!title || !content){
+    const handleClick = function (event) {
+        if (!title || !content) {
             console.log("Error: missing value for Asking a question");
         }
         else {
@@ -28,41 +33,44 @@ export default function AskAQuestion() {
                 window.location.reload();
             });
         }
-        
+
     }
 
-    const handleChangeTitle = function(event) {
+    const handleChangeTitle = function (event) {
         title = event.target.value;
     }
 
-    const handleChangeContent = function(event) {
+    const handleChangeContent = function (event) {
         content = event.target.value;
     }
 
-    return(
-        <Card>
-            <CardHeader 
-            title={
-                <TextField 
-                    label='Add a Title'
-                    variant='outlined'
-                    onChange={handleChangeTitle}
-                />
-            }/>
+    return (
+        <Card className={classes.root}>
+            <CardHeader
+                title={
+                    <TextField
+                        label='Add a Title'
+                        variant='outlined'
+                        onChange={handleChangeTitle}
+                        fullWidth={true}
+                    />
+                } />
             <CardContent>
-                <TextField 
-                multiline 
-                rows={5}
-                placeholder='Start typing your question here...'
-                variant='outlined'
-                onChange={handleChangeContent}
+                <TextField
+                    multiline
+                    rows={5}
+                    placeholder='Start typing your question here...'
+                    variant='outlined'
+                    onChange={handleChangeContent}
+                    fullWidth={true}
                 />
             </CardContent>
-            <CardActions>
+            <CardActions style={{ display: 'flex', justifyContent: 'flex-end' }}>
                 <Button
                     variant='contained'
                     color='primary'
                     onClick={handleClick}
+
                 >
                     Post
                 </Button>
@@ -70,51 +78,3 @@ export default function AskAQuestion() {
         </Card>
     )
 }
-
-// export default class AskAQuestion extends React.Component {
-//     constructor(){
-//         super();
-//     }
-
-//     render(){
-//         //const classes = useStyles()
-//         const [contentValue, setContentValue] = useState('Controlled')
-
-//         const handleChange = (event) => {
-//             setContentValue(event.target.value)
-//         }
-
-//         const handleClick = function(event) {
-//             console.log(1);
-//         }
-
-//         return(
-//             <Card>
-//                 <CardHeader 
-//                 title={
-//                     <TextField 
-//                         label='Add a Title'
-//                         variant='outlined'
-//                     />
-//                 }/>
-//                 <CardContent>
-//                     <TextField 
-//                     multiline 
-//                     rows={5}
-//                     placeholder='Start typing your question here...'
-//                     variant='outlined'
-//                     />
-//                 </CardContent>
-//                 <CardActions>
-//                     <Button
-//                         variant='contained'
-//                         color='primary'
-//                         onClick={handleClick}
-//                     >
-//                         Post
-//                     </Button>
-//                 </CardActions>
-//             </Card>
-//         )
-//     }
-// }
