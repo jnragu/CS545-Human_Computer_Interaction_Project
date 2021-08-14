@@ -6,6 +6,7 @@ const useStyles = makeStyles(theme => ({}))
 
 export default function AskAQuestion() {
     //used to store Title and Content
+    var name;
     var title;
     var content;
 
@@ -22,8 +23,10 @@ export default function AskAQuestion() {
         }
         else {
             var date = new Date().getTime()
-
-            var res = AskQuestion(title, content, date);
+            if (!name) {
+                name = "Anonymous"
+            }
+            var res = AskQuestion(name, title, content, date);
             res.then(function () {
                 window.location.reload();
             });
@@ -39,8 +42,20 @@ export default function AskAQuestion() {
         content = event.target.value;
     }
 
+    const handleChangeName = function(event) {
+        name = event.target.value
+    }
+
     return(
         <Card>
+            <CardContent>
+                <TextField 
+                    label='Display Name'
+                    variant='outlined'
+                    onChange={handleChangeName}
+                    defaultValue="Anonymous"
+                />
+            </CardContent>
             <CardHeader 
             title={
                 <TextField 

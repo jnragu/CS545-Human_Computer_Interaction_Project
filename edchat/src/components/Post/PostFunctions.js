@@ -38,8 +38,9 @@ function Respond(id, response){
 
 //Create a brand new question in the database.
 //Initialize responses to empty array.
-function AskQuestion(question, content, date){
+function AskQuestion(name, question, content, date){
     var response = db.collection("post").add({
+        "name": name,
         "question": question,
         "content": content,
         "date": date,
@@ -48,4 +49,27 @@ function AskQuestion(question, content, date){
     return response;
 }
 
-export {GetAllPosts, AskQuestion, Respond}
+async function GetAllCourses() {
+    var courses = await db.collection("courses").get();
+    var AllCourses = []
+    courses.forEach((doc) => {
+        AllCourses.push({
+            "id": doc.id,
+            "data": doc.data()
+        });
+    });
+
+    return AllCourses;
+}
+
+//Create a brand new course in the database.
+//Initialize responses to empty array.
+function CreateCourse(course_name, course_id){
+    var response = db.collection("courses").add({
+        "course_name": course_name,
+        "course_id": course_id
+    });
+    return response;
+}
+
+export {GetAllPosts, AskQuestion, Respond, GetAllCourses, CreateCourse}

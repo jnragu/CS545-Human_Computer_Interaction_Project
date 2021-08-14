@@ -28,7 +28,7 @@ class Post extends React.Component {
         // New React Component?
         var date = new Date(post.data.date).toLocaleString('en-US', { year: 'numeric', month: 'long', day: 'numeric', hour12: true, hour: "numeric", minute: "numeric" });
         return <div>
-            <PostHeader author={<PostAuthor time={date} author="Joe" />} title={post.data.question} />
+            <PostHeader author={<PostAuthor time={date} author={post.data.name} />} title={post.data.question} />
             <PostContent content={post.data.content} />
             <PostActions responses={post.data.responses} postid={post.id} />
         </div>;

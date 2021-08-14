@@ -2,10 +2,12 @@ import React from 'react'
 import { makeStyles, Drawer, Button, Toolbar, Typography } from '@material-ui/core'
 import SideBarItem from './SideBarItem'
 import { PersonAdd } from '@material-ui/icons'
+import { withStyles } from '@material-ui/styles';
+import {CreateCourse, GetAllCourses} from '../Post/PostFunctions.js';
 
 const drawerWidth = 270;
 
-const useStyles = makeStyles(theme => ({
+const styles = theme => ({
     drawer: {
         width: drawerWidth,
         flexShrink: 0,
@@ -23,42 +25,69 @@ const useStyles = makeStyles(theme => ({
     },
     action: {
         marginLeft: '50px'
+    },
+    courses: {
+        listStyleType: 'none'
     }
-}))
+})
 
 
-export default function PostContent() {
-    const classes = useStyles()
-    return (
-        <Drawer
-            className={classes.drawer}
-            variant='permanent'
-            anchor='left'
-            classes={{
-                paper: classes.drawerPaper,
-            }}
-        >
-            <Toolbar />
-            <div className={classes.drawerContainer} >
-                <Typography variant='h2' className={classes.drawerTitle}>
-                    Current Courses (5)
-                </Typography>
-                <SideBarItem
-                    class='Human Computer Interaction'
-                    classid='CS-545-WS'
-                />
-                <SideBarItem class='Thermodynamics' classid='E-234-A' />
-                <SideBarItem class='Astronomy' classid='PEP-151-WS' />
-                <SideBarItem class='Psychology of Prejudice' classid='HSS-333-A' />
-                <Button
-                    variant='contained'
-                    color='primary'
-                    startIcon={<PersonAdd />}
-                    className={classes.action}
-                >
-                    Join a new class
-                </Button>
-            </div>
-        </Drawer>
-    )
+class SideBar extends React.Component {
+    constructor(){
+        super();
+        this.state = {
+            "courses": []
+        }
+    }
+
+    componentWillMount() {
+        const promise = GetAllCourses();
+        const { classes } = this.props;
+
+        //Promise is binded to this class so it can have scope of this.state
+        promise.then(function (AllCourses) {
+
+            var courses = AllCourses.map((course) => (
+
+                <li key={course.id} className={classes.courses}>
+                    <SideBarItem class={course.data.course_name} classid={course.data.course_id} />
+                </li>
+    
+            ))
+
+            this.setState({"courses": courses });
+        }.bind(this));
+    }
+
+    render() {
+        const { classes } = this.props;
+        return (
+            <Drawer
+                className={classes.drawer}
+                variant='permanent'
+                anchor='left'
+                classes={{
+                    paper: classes.drawerPaper,
+                }}
+            >
+                <Toolbar />
+                <div className={classes.drawerContainer} >
+                    <Typography variant='h2' className={classes.drawerTitle}>
+                        Current Courses (5)
+                    </Typography>
+                    {this.state.courses}
+                    <Button
+                        variant='contained'
+                        color='primary'
+                        startIcon={<PersonAdd />}
+                        className={classes.action}
+                    >
+                        Create a new class
+                    </Button>
+                </div>
+            </Drawer>
+        )
+    }
 }
+
+export default withStyles(styles)(SideBar);
