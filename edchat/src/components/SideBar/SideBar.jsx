@@ -108,7 +108,7 @@ class SideBar extends React.Component {
                     >
                         Join a new class
                     </Button>
-                    <Dialog open={this.handleClose} onClose={this.handleClose} aria-labelledby="form-dialog-title">
+                    <Dialog open={this.state.isOpen} onClose={this.handleClose} aria-labelledby="form-dialog-title">
                         <DialogTitle id="form-dialog-title">Join a new Class</DialogTitle>
                         <DialogContent>
                             <DialogContentText>
