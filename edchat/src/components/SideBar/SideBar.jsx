@@ -1,9 +1,15 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { makeStyles, Drawer, Button, Toolbar, Typography } from '@material-ui/core'
 import SideBarItem from './SideBarItem'
 import { PersonAdd } from '@material-ui/icons'
 import { withStyles } from '@material-ui/styles';
-import {CreateCourse, GetAllCourses} from '../Post/PostFunctions.js';
+import { CreateCourse, GetAllCourses } from '../Post/PostFunctions.js';
+import TextField from '@material-ui/core/TextField';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
 
 const drawerWidth = 270;
 
@@ -32,13 +38,29 @@ const styles = theme => ({
 })
 
 
+
+
+
 class SideBar extends React.Component {
-    constructor(){
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
-            "courses": []
+            "courses": [],
+            "isOpen": false
         }
+        this.handleOpen = this.handleOpen.bind(this);
+        this.handleClose = this.handleClose.bind(this);
     }
+
+    handleOpen() {
+        this.setState({ isOpen: true });
+    }
+
+    handleClose() {
+        this.setState({ isOpen: false });
+        console.log(this.state.isOpen)
+    }
+
 
     componentWillMount() {
         const promise = GetAllCourses();
@@ -52,12 +74,13 @@ class SideBar extends React.Component {
                 <li key={course.id} className={classes.courses}>
                     <SideBarItem class={course.data.course_name} classid={course.data.course_id} />
                 </li>
-    
+
             ))
 
-            this.setState({"courses": courses });
+            this.setState({ "courses": courses });
         }.bind(this));
     }
+
 
     render() {
         const { classes } = this.props;
@@ -81,9 +104,42 @@ class SideBar extends React.Component {
                         color='primary'
                         startIcon={<PersonAdd />}
                         className={classes.action}
+                        onClick={this.handleOpen}
                     >
-                        Create a new class
+                        Join a new class
                     </Button>
+                    <Dialog open={this.handleClose} onClose={this.handleClose} aria-labelledby="form-dialog-title">
+                        <DialogTitle id="form-dialog-title">Join a new Class</DialogTitle>
+                        <DialogContent>
+                            <DialogContentText>
+                                To join a new class, enter the name of the class, followed by the class course ID
+                            </DialogContentText>
+                            <TextField
+                                autoFocus
+                                margin="dense"
+                                id="name"
+                                label="Course Name"
+                                type="string"
+                                fullWidth
+                            />
+                            <TextField
+                                autoFocus
+                                margin="dense"
+                                id="name"
+                                label="Course ID"
+                                type="string"
+                                fullWidth
+                            />
+                        </DialogContent>
+                        <DialogActions>
+                            <Button onClick={this.handleClose} color="primary">
+                                Cancel
+                            </Button>
+                            <Button onClick={this.handleClose} color="primary">
+                                Join Class
+                            </Button>
+                        </DialogActions>
+                    </Dialog>
                 </div>
             </Drawer>
         )
