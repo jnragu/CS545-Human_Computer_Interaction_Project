@@ -1,13 +1,13 @@
-import React, { useState } from 'react'
-import { makeStyles, Button, Grid, TextField, InputAdornment, Popover, Typography, Dialog, DialogTitle, DialogContent } from '@material-ui/core'
+import React, { Component, useState } from 'react'
+import { makeStyles, Button, Grid, TextField, InputAdornment, Popover, Typography } from '@material-ui/core'
 import { Search, AddBox } from '@material-ui/icons'
 import AskAQuestion from './AskAQuestion'
 
 const useStyles = makeStyles(theme => ({
     root: {
-        paddingBottom: '30px',
-        paddingTop: '20px',
-        marginLeft: '25px'
+        direction: 'row',
+        justifyContent: 'flex-start',
+        alignItems: 'flex-start',
     },
 }))
 
@@ -37,7 +37,7 @@ export default function ContentActions() {
                 >
                     Ask a Question
                 </Button>
-                <Dialog
+                <Popover
                     id={id}
                     open={open}
                     anchorEl={anchorEl}
@@ -51,14 +51,21 @@ export default function ContentActions() {
                         horizontal: 'center',
                     }}
                 >
-                    <DialogTitle>
-                        Create Post
-                    </DialogTitle>
-                    <DialogContent>
-                        Click away to cancel post
-                    </DialogContent>
                     <AskAQuestion />
-                </Dialog>
+                </Popover>
+            </Grid>
+            <Grid item>
+                <TextField
+                    variant='outlined'
+                    label='Tags'
+                    InputProps={{
+                        startAdornment: (
+                            <InputAdornment position='start'>
+                                <Search fontSize='small' />
+                            </InputAdornment>
+                        )
+                    }}
+                />
             </Grid>
         </Grid>
     )

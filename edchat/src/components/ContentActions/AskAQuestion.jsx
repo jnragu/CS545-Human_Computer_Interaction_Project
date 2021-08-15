@@ -2,12 +2,7 @@ import React, { useState } from 'react'
 import { makeStyles, Card, CardHeader, TextField, CardContent, Button, CardActions } from '@material-ui/core'
 import { AskQuestion } from '../Post/PostFunctions.js'
 
-const useStyles = makeStyles(theme => ({
-    root: {
-        width: '500px'
-    }
-
-}))
+const useStyles = makeStyles(theme => ({}))
 
 export default function AskAQuestion() {
     //used to store Title and Content
