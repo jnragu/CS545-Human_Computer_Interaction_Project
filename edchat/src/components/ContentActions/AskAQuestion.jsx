@@ -1,90 +1,132 @@
 import React, { useState } from 'react'
 import { makeStyles, Card, CardHeader, TextField, CardContent, Button, CardActions } from '@material-ui/core'
 import {AskQuestion} from '../Post/PostFunctions.js'
+import { withStyles } from '@material-ui/styles';
+import {CreateCourse, GetAllCourses} from '../Post/PostFunctions.js';
 
-const useStyles = makeStyles(theme => ({}))
+const styles = theme => ({
+    "dropDown": {
+        width: '80%',
+        marginLeft: '10%',
+        margingRight: '10%'
+    }
+});
 
-export default function AskAQuestion() {
-    //used to store Title and Content
-    var name;
-    var title;
-    var content;
+class AskAQuestion extends React.Component {
 
-    const classes = useStyles()
-    const [contentValue, setContentValue] = useState('Controlled')
+    constructor() {
+        super();
+        this.state = {
+            "options": [],
+            "selectedCourse": ""
+        }
+    }
+    
+    componentWillMount() {
+        const promise = GetAllCourses();
 
-    const handleChange = (event) => {
-        setContentValue(event.target.value)
+        //Promise is binded to this class so it can have scope of this.state
+        promise.then(function (AllCourses) {
+
+            this.setState({"selectedCourse": AllCourses[0].data.course_id});
+
+            var courses = AllCourses.map((course, index) => (
+                <option value={course.data.course_id}>{course.data.course_id}</option>
+    
+            ))
+
+            this.setState({"options": courses });
+        }.bind(this));
     }
 
-    const handleClick = function(event) {
-        if (!title || !content){
-            console.log("Error: missing value for Asking a question");
-        }
-        else {
-            var date = new Date().getTime()
-            if (!name) {
-                name = "Anonymous"
+    render() {
+        //used to store Title and Content
+        const { classes } = this.props;
+        var name;
+        var title;
+        var content;
+
+
+
+        const handleClick = function(event) {
+            var course = this.state.selectedCourse;
+            if (!title || !content){
+                console.log("Error: missing value for Asking a question");
             }
-            var res = AskQuestion(name, title, content, date);
-            res.then(function () {
-                window.location.reload();
-            });
+            else {
+                var date = new Date().getTime()
+                if (!name) {
+                    name = "Anonymous"
+                }
+                var res = AskQuestion(name, course, title, content, date);
+                res.then(function () {
+                    window.location.reload();
+                });
+            }
+            
+        }.bind(this);
+
+        const handleChangeTitle = function(event) {
+            title = event.target.value;
         }
-        
-    }
 
-    const handleChangeTitle = function(event) {
-        title = event.target.value;
-    }
+        const handleChangeContent = function(event) {
+            content = event.target.value;
+        }
 
-    const handleChangeContent = function(event) {
-        content = event.target.value;
-    }
+        const handleChangeName = function(event) {
+            name = event.target.value;
+        }
 
-    const handleChangeName = function(event) {
-        name = event.target.value
-    }
+        const handleChangeCourse = function(event) {
+            this.state.selectedCourse = event.target.value;
+        }.bind(this)
 
-    return(
-        <Card>
-            <CardContent>
-                <TextField 
-                    label='Display Name'
+        return(
+            <Card>
+                <CardContent>
+                    <TextField 
+                        label='Display Name'
+                        variant='outlined'
+                        onChange={handleChangeName}
+                        defaultValue="Anonymous"
+                    />
+                </CardContent>
+                <select name="selectList" id="selectList" className={classes.dropDown} onChange={handleChangeCourse}>
+                  {this.state.options}
+                </select>
+                <CardHeader 
+                title={
+                    <TextField 
+                        label='Add a Title'
+                        variant='outlined'
+                        onChange={handleChangeTitle}
+                    />
+                }/>
+                <CardContent>
+                    <TextField 
+                    multiline 
+                    rows={5}
+                    placeholder='Start typing your question here...'
                     variant='outlined'
-                    onChange={handleChangeName}
-                    defaultValue="Anonymous"
-                />
-            </CardContent>
-            <CardHeader 
-            title={
-                <TextField 
-                    label='Add a Title'
-                    variant='outlined'
-                    onChange={handleChangeTitle}
-                />
-            }/>
-            <CardContent>
-                <TextField 
-                multiline 
-                rows={5}
-                placeholder='Start typing your question here...'
-                variant='outlined'
-                onChange={handleChangeContent}
-                />
-            </CardContent>
-            <CardActions>
-                <Button
-                    variant='contained'
-                    color='primary'
-                    onClick={handleClick}
-                >
-                    Post
-                </Button>
-            </CardActions>
-        </Card>
-    )
+                    onChange={handleChangeContent}
+                    />
+                </CardContent>
+                <CardActions>
+                    <Button
+                        variant='contained'
+                        color='primary'
+                        onClick={handleClick}
+                    >
+                        Post
+                    </Button>
+                </CardActions>
+            </Card>
+        )
+    }
 }
+
+export default withStyles(styles)(AskAQuestion);
 
 // export default class AskAQuestion extends React.Component {
 //     constructor(){

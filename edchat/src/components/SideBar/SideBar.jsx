@@ -50,6 +50,9 @@ class SideBar extends React.Component {
         }
         this.handleOpen = this.handleOpen.bind(this);
         this.handleClose = this.handleClose.bind(this);
+
+        this.courseName = "";
+        this.courseID = "";
     }
 
     handleOpen() {
@@ -58,7 +61,23 @@ class SideBar extends React.Component {
 
     handleClose() {
         this.setState({ isOpen: false });
-        console.log(this.state.isOpen)
+    }
+
+    handleSubmit() {
+        if (this.courseName && this.courseID){
+            var res = CreateCourse(this.courseName, this.courseID);
+            res.then(function () {
+                window.location.reload();
+            });
+        }
+    }
+
+    handleChangeName(event) {
+        this.courseName = event.target.value;
+    }
+
+    handleChangeCourseID(event) {
+        this.courseID = event.target.value;
     }
 
 
@@ -121,6 +140,7 @@ class SideBar extends React.Component {
                                 label="Course Name"
                                 type="string"
                                 fullWidth
+                                onChange={this.handleChangeName.bind(this)}
                             />
                             <TextField
                                 autoFocus
@@ -129,13 +149,14 @@ class SideBar extends React.Component {
                                 label="Course ID"
                                 type="string"
                                 fullWidth
+                                onChange={this.handleChangeCourseID.bind(this)}
                             />
                         </DialogContent>
                         <DialogActions>
                             <Button onClick={this.handleClose} color="primary">
                                 Cancel
                             </Button>
-                            <Button onClick={this.handleClose} color="primary">
+                            <Button onClick={this.handleSubmit.bind(this)} color="primary">
                                 Join Class
                             </Button>
                         </DialogActions>

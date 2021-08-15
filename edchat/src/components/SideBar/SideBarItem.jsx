@@ -19,9 +19,14 @@ const useStyles = makeStyles(theme => ({
 }))
 
 export default function SideBarItem(props) {
+    var classid = props.classid;
+
+    const handleClick = function(event) {
+        window.location.href = "/?classid=" + classid;
+    }
     const classes = useStyles()
     return(
-        <Container>
+        <Container onClick={handleClick}>
             <Grid container className={classes.grid}>
                 <Grid item className={classes.icon}>
                     <FiberManualRecord fontSize='small'/>

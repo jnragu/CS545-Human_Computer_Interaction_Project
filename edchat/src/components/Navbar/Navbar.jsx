@@ -42,14 +42,18 @@ export default function Navbar() {
         setAnchorEl(null)
     }
 
+    const goToHome = function(){
+        window.location.href = "/";
+    }
+
     const open = Boolean(anchorEl)
     const id = open ? 'notification-popover' : undefined
 
     return (
         <AppBar postition='fixed' color='inherit' className={classes.root}>
             <Toolbar>
-                <Avatar src={logo} />
-                <Typography variant='h2' className={classes.title}>
+                <Avatar src={logo} onClick={goToHome}/>
+                <Typography variant='h2' className={classes.title} onClick={goToHome}>
                     Stevens Institute of Technology
                 </Typography>
                 <TextField

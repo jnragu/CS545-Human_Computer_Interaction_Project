@@ -37,6 +37,10 @@ class Post extends React.Component {
     componentWillMount() {
         const promise = GetAllPosts();
 
+        const urlParams = new URLSearchParams(window.location.search);
+        const myParam = urlParams.get('classid');
+        console.log(myParam);
+
         //Promise is binded to this class so it can have scope of this.state
         promise.then(function (AllPosts) {
 
@@ -45,12 +49,14 @@ class Post extends React.Component {
             var rows = [];
 
             for (var i = 0; i < AllPosts.length; i++) {
-                const post = this.MakePost(AllPosts[i]);
-                const elm =
-                    <li key={AllPosts[i].id} >
-                        {post}
-                    </li>
-                rows.push(elm)
+                if (AllPosts[i].data.courseid == myParam || !myParam) {
+                    const post = this.MakePost(AllPosts[i]);
+                    const elm =
+                        <li key={AllPosts[i].id} >
+                            {post}
+                        </li>
+                    rows.push(elm)
+                }
 
             }
 
