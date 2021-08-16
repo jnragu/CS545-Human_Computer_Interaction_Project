@@ -83,7 +83,7 @@ export default function PostActions(props) {
                             variant='button' 
                             className={classes.viewResponses}
                         >
-                            view {responses.length} response
+                            View {responses.length} Response
                         </Typography>
                     }
                     { responses.length != 1 && responses.length != 0 &&
@@ -91,7 +91,7 @@ export default function PostActions(props) {
                             variant='button' 
                             className={classes.viewResponses}
                         >
-                            view {responses.length} responses
+                            View {responses.length} Responses
                         </Typography>
                     }
                 </CardActions>
