@@ -1,16 +1,20 @@
 import React from 'react'
-import { Container, Card, Accordion } from '@material-ui/core'
+import { Container, Card, Box } from '@material-ui/core'
 import { withStyles } from '@material-ui/styles';
 import PostHeader from './PostHeader'
 import PostAuthor from './PostAuthor'
 import PostContent from './PostContent'
 import PostActions from './PostActions'
 import { AskQuestion, Respond, GetAllPosts } from './PostFunctions.js'
+import { spacing } from '@material-ui/system'
 
 const styles = theme => ({
     root: {
         maxWidth: 'sm',
         listStyleType: 'none',
+    },
+    card: {
+        padding: theme.spacing(2)
     }
 })
 
@@ -24,14 +28,16 @@ class Post extends React.Component {
 
     MakePost(post) {
         // TODO
-        // Add responses to question's content. 
         // New React Component?
         var date = new Date(post.data.date).toLocaleString('en-US', { year: 'numeric', month: 'long', day: 'numeric', hour12: true, hour: "numeric", minute: "numeric" });
-        return <div>
-            <PostHeader author={<PostAuthor time={date} author={post.data.name} />} title={post.data.question} />
-            <PostContent content={post.data.content} />
-            <PostActions responses={post.data.responses} postid={post.id} />
-        </div>;
+        return (
+            <Card>
+                <PostHeader author={<PostAuthor time={date} author={post.data.name} />} title={post.data.question} />
+                <PostContent content={post.data.content} />
+                <PostActions responses={post.data.responses} postid={post.id} />
+            </Card>
+        )
+
     }
 
     componentWillMount() {
@@ -69,7 +75,7 @@ class Post extends React.Component {
         return (
             <div>
                 <Container className={classes.root}>
-                    <Card>
+                    <Card className={classes.post}>
                         {this.state.content}
                     </Card>
                 </Container>

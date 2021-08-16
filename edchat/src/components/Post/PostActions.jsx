@@ -1,20 +1,26 @@
 import React from 'react'
 import { makeStyles, CardActions, Button, Typography, Accordion, AccordionDetails, AccordionSummary, AccordionActions, TextField } from '@material-ui/core'
-import { Bookmark, ChatBubbleRounded } from '@material-ui/icons'
+import { Bookmark, ChatBubbleRounded, PostAdd } from '@material-ui/icons'
 import Response from './Response'
 import PostAuthor from './PostAuthor'
 import { Respond } from './PostFunctions.js'
+import { spacing } from '@material-ui/system';
+
 
 const useStyles = makeStyles(theme => ({
     responses: {
         marginLeft: 'auto',
         marginRight: '10px',
-        listStyleType: 'none'
+        listStyleType: 'none',
+        color: theme.palette.text.primary
     },
     bookmark: {
         marginLeft: '40px',
         marginRight: '15px',
-    }
+    }, 
+    viewResponses: {
+        color: theme.palette.text.secondary
+    },
 }))
 
 export default function PostActions(props) {
@@ -69,14 +75,25 @@ export default function PostActions(props) {
                         variant='contained'
                         color='secondary'
                         disableElevation
-                        onClick={(event) => event.stopPropagation()}
-                        onFocus={(event) => event.stopPropagation()}
                     >
-                        Add Response
+                        Add a Response
                     </Button>
-                    <Typography variant='button' className={classes.responses}>
-                        View all responses
-                    </Typography>
+                    { responses.length == 1 && 
+                        <Typography 
+                            variant='button' 
+                            className={classes.viewResponses}
+                        >
+                            view {responses.length} response
+                        </Typography>
+                    }
+                    { responses.length != 1 && responses.length != 0 &&
+                        <Typography 
+                            variant='button' 
+                            className={classes.viewResponses}
+                        >
+                            view {responses.length} responses
+                        </Typography>
+                    }
                 </CardActions>
             </AccordionSummary>
             <AccordionDetails>
@@ -86,11 +103,18 @@ export default function PostActions(props) {
             </AccordionDetails>
             <AccordionActions>
                 <TextField fullWidth id='response' variant='outlined' onChange={handleChangeResponse} />
-                <Button variant='secondary' onClick={RespondToPost} color="#90caf9">
-                    Post Response
+                <Button 
+                    variant='contained' 
+                    color='primary' 
+                    onClick={RespondToPost} 
+                    disableElevation
+                    startIcon={<PostAdd />}
+                >
+                    <Typography variant='button'>
+                        Post
+                    </Typography>
                 </Button>
             </AccordionActions>
         </Accordion>
-
     )
 }

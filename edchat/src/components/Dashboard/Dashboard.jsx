@@ -16,6 +16,10 @@ const useStyles = makeStyles( theme => ({
         backgroundColor: theme.palette.background,
         padding: theme.spacing(3),
       },
+    post: {
+        padding: theme.spacing(2), 
+        margin: theme.spacing(2)
+    }
   }))
 
 
@@ -29,7 +33,7 @@ export default function Dashboard() {
                 <main className={classes.content}>
                     <Toolbar />
                     <ContentActions />
-                    <Post />
+                    <Post className={classes.post}/>
                 </main>
             </Container>
         )
