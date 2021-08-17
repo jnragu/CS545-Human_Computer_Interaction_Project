@@ -125,13 +125,13 @@ class SideBar extends React.Component {
                         className={classes.action}
                         onClick={this.handleOpen}
                     >
-                        Join a new class
+                        Add a New Class
                     </Button>
                     <Dialog open={this.state.isOpen} onClose={this.handleClose} aria-labelledby="form-dialog-title">
                         <DialogTitle id="form-dialog-title">Add a New Class</DialogTitle>
                         <DialogContent>
                             <DialogContentText>
-                                To join a new class, enter the name of the class, followed by the class course ID
+                                To add a new class, enter the name of the class, followed by the class course ID
                             </DialogContentText>
                             <TextField
                                 autoFocus
