@@ -58,7 +58,7 @@ export default function Navbar() {
                 </Typography>
                 <TextField
                     variant='outlined'
-                    label='Tags'
+                    label='Search'
                     InputProps={{
                         endAdornment: (
                             <InputAdornment position='end'>
