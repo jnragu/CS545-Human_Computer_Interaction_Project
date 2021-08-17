@@ -33,7 +33,9 @@ const styles = theme => ({
         marginLeft: '50px'
     },
     courses: {
-        listStyleType: 'none'
+        listStyleType: 'none',
+
+
     }
 })
 
@@ -64,7 +66,7 @@ class SideBar extends React.Component {
     }
 
     handleSubmit() {
-        if (this.courseName && this.courseID){
+        if (this.courseName && this.courseID) {
             var res = CreateCourse(this.courseName, this.courseID);
             res.then(function () {
                 window.location.reload();
@@ -91,7 +93,7 @@ class SideBar extends React.Component {
             var courses = AllCourses.map((course) => (
 
                 <li key={course.id} className={classes.courses}>
-                    <SideBarItem class={course.data.course_name} classid={course.data.course_id} />
+                    <SideBarItem class={course.data.course_name} classid={course.data.course_id} style={{ cursor: 'pointer' }} />
                 </li>
 
             ))

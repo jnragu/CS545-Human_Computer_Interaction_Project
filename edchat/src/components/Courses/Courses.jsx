@@ -1,29 +1,45 @@
-import React, { useState } from 'react';
-import { makeStyles, Button, TextField, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@material-ui/core';
-import courseStyle from './coursesStyle.js'
+import React from 'react';
+import { Button, TextField, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@material-ui/core';
 import PersonAddOutlinedIcon from '@material-ui/icons/PersonAddOutlined';
+import { withStyles } from '@material-ui/styles';
+import { BrowserRouter as Router, Link } from "react-router-dom";
+import { GetAllCourses } from '../Post/PostFunctions.js';
 
-import { BrowserRouter as Router, Route, Link, Switch, } from "react-router-dom";
-import {CreateCourse, GetAllCourses} from '../Post/PostFunctions.js';
 
-
-const useStyles = makeStyles(courseStyle);
+const styles = theme => ({
+    root: {
+        width: '500px'
+    }
+});
 
 class Courses extends React.Component {
 
-    constructor(){
+    constructor() {
         super();
         this.state = {
-            "courses": []
+            "courses": [],
+            "isOpen": false
         }
+        this.handleOpen = this.handleOpen.bind(this);
+        this.handleClose = this.handleClose.bind(this);
     }
+
+    handleOpen() {
+        this.setState({ isOpen: true });
+    }
+
+    handleClose() {
+        this.setState({ isOpen: false });
+        console.log(this.state.isOpen)
+    }
+
 
     componentWillMount() {
         const promise = GetAllCourses();
 
         //Promise is binded to this class so it can have scope of this.state
         promise.then(function (AllCourses) {
-
+            const { classes } = this.props;
             var courses = AllCourses.map((course, index) => (
 
                 <div key={index} className={classes.courses}>
@@ -33,25 +49,16 @@ class Courses extends React.Component {
                         <p className={classes.section}>{course.data.course_id}</p>
                     </div>
                 </div>
-    
+
             ))
 
-            this.setState({"courses": courses });
+            this.setState({ "courses": courses });
         }.bind(this));
     }
 
-    render(){
-        const classes = useStyles()
+    render() {
+        const { classes } = this.props;
 
-        const [open, setOpen] = useState(false);
-
-        const handleClickOpen = () => {
-            setOpen(true);
-        };
-
-        const handleClose = () => {
-            setOpen(false);
-        };
 
         const courses = [
             {
@@ -91,11 +98,11 @@ class Courses extends React.Component {
 
                 </Router>
                 <section className={classes.join}>
-                    <Button className={classes.joinBtn} startIcon={<PersonAddOutlinedIcon />} onClick={handleClickOpen}>
+                    <Button className={classes.joinBtn} startIcon={<PersonAddOutlinedIcon />} onClick={this.handleOpen}>
                         Join A new class
                     </Button>
                 </section>
-                <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
+                <Dialog open={this.handleClose} onClose={this.handleClose} aria-labelledby="form-dialog-title">
                     <DialogTitle id="form-dialog-title">Join a course</DialogTitle>
                     <DialogContent>
                         <DialogContentText>
@@ -111,10 +118,10 @@ class Courses extends React.Component {
                         />
                     </DialogContent>
                     <DialogActions>
-                        <Button onClick={handleClose} color="primary">
+                        <Button onClick={this.handleClose} color="primary">
                             Cancel
                         </Button>
-                        <Button onClick={handleClose} color="primary">
+                        <Button onClick={this.handleClose} color="primary">
                             Join
                         </Button>
                     </DialogActions>
@@ -122,7 +129,7 @@ class Courses extends React.Component {
             </div>
         )
     }
-    
+
 }
 
-export default Courses
+export default withStyles(styles)(Courses);

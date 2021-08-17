@@ -9,7 +9,8 @@ import {
     Avatar,
     Popover,
     AppBar,
-    IconButton
+    IconButton,
+    Tooltip
 } from '@material-ui/core'
 import { Search, Notifications, Person } from '@material-ui/icons'
 import logo from '../Icons/StevensLogo.png'
@@ -20,8 +21,10 @@ const useStyles = makeStyles(theme => ({
         zIndex: theme.zIndex.drawer + 1,
     },
     title: {
-        marginLeft: '20px'
+        marginLeft: '20px',
+        cursor: 'pointer'
     },
+
     search: {
         marginLeft: '60px'
     },
@@ -42,7 +45,7 @@ export default function Navbar() {
         setAnchorEl(null)
     }
 
-    const goToHome = function(){
+    const goToHome = function () {
         window.location.href = "/";
     }
 
@@ -52,10 +55,14 @@ export default function Navbar() {
     return (
         <AppBar postition='fixed' color='inherit' className={classes.root}>
             <Toolbar>
-                <Avatar src={logo} onClick={goToHome}/>
-                <Typography variant='h2' className={classes.title} onClick={goToHome}>
-                    Stevens Institute of Technology
-                </Typography>
+                <Tooltip title="Home">
+                    <Avatar src={logo} onClick={goToHome} style={{ cursor: 'pointer' }} />
+                </Tooltip>
+                <Tooltip title="Home">
+                    <Typography variant='h2' className={classes.title} onClick={goToHome}>
+                        Stevens Institute of Technology
+                    </Typography>
+                </Tooltip>
                 <TextField
                     variant='outlined'
                     label='Search'

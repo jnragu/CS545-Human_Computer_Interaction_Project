@@ -1,5 +1,5 @@
 import React from 'react'
-import { makeStyles, Container, Typography, Grid } from '@material-ui/core'
+import { makeStyles, Container, Typography, Grid, Button } from '@material-ui/core'
 import { FiberManualRecord } from '@material-ui/icons'
 
 const useStyles = makeStyles(theme => ({
@@ -7,7 +7,8 @@ const useStyles = makeStyles(theme => ({
         direction: 'row',
         justifyContent: 'flex-start',
         alignItems: 'center',
-        margin: '15px'
+        margin: '15px',
+
     },
     icon: {
         marginRight: '8px',
@@ -21,23 +22,33 @@ const useStyles = makeStyles(theme => ({
 export default function SideBarItem(props) {
     var classid = props.classid;
 
-    const handleClick = function(event) {
+    const handleClick = function (event) {
         window.location.href = "/?classid=" + classid;
     }
     const classes = useStyles()
-    return(
+    return (
         <Container onClick={handleClick}>
             <Grid container className={classes.grid}>
                 <Grid item className={classes.icon}>
-                    <FiberManualRecord fontSize='small'/>
+                    <FiberManualRecord fontSize='small' />
                 </Grid>
                 <Grid item>
-                    <Typography variant='h2'>
-                    {props.class}
-                    </Typography>
-                    <Typography variant='h3' className={classes.classid}>
-                        {props.classid}
-                    </Typography>
+                    <button style={{
+                        cursor: 'pointer', background: 'none',
+                        border: 'none',
+                        padding: '0',
+                        color: '#069',
+                        textDecoration: 'underline',
+                        textAlign: 'left',
+                        width: '100%',
+                    }}>
+                        <Typography variant='h2' style={{ cursor: 'pointer' }}>
+                            {props.class}
+                        </Typography>
+                        <Typography variant='h3' className={classes.classid} style={{ cursor: 'pointer' }}>
+                            {props.classid}
+                        </Typography>
+                    </button>
                 </Grid>
             </Grid>
         </Container>

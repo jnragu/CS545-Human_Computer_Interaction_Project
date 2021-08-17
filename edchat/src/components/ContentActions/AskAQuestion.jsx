@@ -1,8 +1,8 @@
-import React, { useState } from 'react'
-import { makeStyles, Card, CardHeader, TextField, CardContent, Button, CardActions } from '@material-ui/core'
+import React from 'react'
+import { Card, CardHeader, TextField, CardContent, Button, CardActions } from '@material-ui/core'
 import { AskQuestion } from '../Post/PostFunctions.js'
 import { withStyles } from '@material-ui/styles';
-import { CreateCourse, GetAllCourses } from '../Post/PostFunctions.js';
+import { GetAllCourses } from '../Post/PostFunctions.js';
 
 const styles = theme => ({
     root: {
@@ -16,9 +16,22 @@ class AskAQuestion extends React.Component {
         super();
         this.state = {
             "options": [],
-            "selectedCourse": ""
+            "selectedCourse": "",
+            "isOpen": true
         }
+        this.handleOpen = this.handleOpen.bind(this);
+        this.handleClose = this.handleClose.bind(this);
     }
+
+    handleOpen() {
+        this.setState({ isOpen: true });
+    }
+
+    handleClose() {
+        this.setState({ isOpen: false });
+        console.log(this.state.isOpen)
+    }
+
 
     componentWillMount() {
         const promise = GetAllCourses();
@@ -120,6 +133,11 @@ class AskAQuestion extends React.Component {
                     >
                         Post
                     </Button>
+                    {/* <Button
+                        color='primary'
+                    >
+                        Cancel
+                    </Button> */}
                 </CardActions>
             </Card>
         )
