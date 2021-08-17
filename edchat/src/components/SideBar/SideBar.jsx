@@ -128,7 +128,7 @@ class SideBar extends React.Component {
                         Join a new class
                     </Button>
                     <Dialog open={this.state.isOpen} onClose={this.handleClose} aria-labelledby="form-dialog-title">
-                        <DialogTitle id="form-dialog-title">Join a new Class</DialogTitle>
+                        <DialogTitle id="form-dialog-title">Add a New Class</DialogTitle>
                         <DialogContent>
                             <DialogContentText>
                                 To join a new class, enter the name of the class, followed by the class course ID
@@ -157,7 +157,7 @@ class SideBar extends React.Component {
                                 Cancel
                             </Button>
                             <Button onClick={this.handleSubmit.bind(this)} color="primary">
-                                Join Class
+                                Add Class
                             </Button>
                         </DialogActions>
                     </Dialog>
