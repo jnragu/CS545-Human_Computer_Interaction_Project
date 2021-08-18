@@ -45,7 +45,8 @@ class SideBar extends React.Component {
         super(props);
         this.state = {
             "courses": [],
-            "isOpen": false
+            "isOpen": false,
+            "numCourses": 0
         }
         this.handleOpen = this.handleOpen.bind(this);
         this.handleClose = this.handleClose.bind(this);
@@ -101,6 +102,7 @@ class SideBar extends React.Component {
             ))
 
             this.setState({ "courses": courses });
+            this.setState({"numCourses": courses.length})
         }.bind(this));
     }
 
@@ -119,7 +121,7 @@ class SideBar extends React.Component {
                 <Toolbar />
                 <div className={classes.drawerContainer} >
                     <Typography variant='h2' className={classes.drawerTitle}>
-                        Current Courses (5)
+                        {"Number of Courses: (" + this.state.numCourses + ")"}
                     </Typography>
                     {this.state.courses}
                     <Button

@@ -29,9 +29,13 @@ async function GetAllPosts() {
 //response is just a string
 function Respond(id, response){
     var post = db.collection("post").doc(id);
+    var date = new Date().getTime()
 
     var res = post.update({
-        responses: firebase.firestore.FieldValue.arrayUnion(response)
+        responses: firebase.firestore.FieldValue.arrayUnion({
+            time: date,
+            content: response
+        })
     });
     return res;
 }

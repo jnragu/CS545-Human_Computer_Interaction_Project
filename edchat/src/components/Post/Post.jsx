@@ -14,7 +14,10 @@ const styles = theme => ({
         listStyleType: 'none',
     },
     card: {
-        padding: theme.spacing(2)
+        marginTop: '1px'
+    },
+    listStyle: {
+        listStyleType: 'none'
     }
 })
 
@@ -29,9 +32,10 @@ class Post extends React.Component {
     MakePost(post) {
         // TODO
         // New React Component?
+        const classes = styles();
         var date = new Date(post.data.date).toLocaleString('en-US', { year: 'numeric', month: 'long', day: 'numeric', hour12: true, hour: "numeric", minute: "numeric" });
         return (
-            <Card>
+            <Card className={classes.listStyle}>
                 <PostHeader author={<PostAuthor time={date} author={post.data.name} />} title={post.data.question} />
                 <PostContent content={post.data.content} />
                 <PostActions responses={post.data.responses} postid={post.id} />
@@ -42,7 +46,7 @@ class Post extends React.Component {
 
     componentWillMount() {
         const promise = GetAllPosts();
-
+        const classes = styles();
         const urlParams = new URLSearchParams(window.location.search);
         const myParam = urlParams.get('classid');
         console.log(myParam);
@@ -58,9 +62,12 @@ class Post extends React.Component {
                 if (AllPosts[i].data.courseid == myParam || !myParam) {
                     const post = this.MakePost(AllPosts[i]);
                     const elm =
-                        <li key={AllPosts[i].id} >
-                            {post}
-                        </li>
+                        <div>
+                            <li key={AllPosts[i].id} >
+                                {post}
+                            </li>
+                            <div style={{textIndent: '-9999px'}}>hi</div>
+                        </div>
                     rows.push(elm)
                 }
 
@@ -73,12 +80,8 @@ class Post extends React.Component {
     render() {
         const { classes } = this.props;
         return (
-            <div>
-                <Container className={classes.root}>
-                    <Card className={classes.post}>
-                        {this.state.content}
-                    </Card>
-                </Container>
+            <div className={classes.listStyle}>
+                {this.state.content}
             </div>
         )
     }

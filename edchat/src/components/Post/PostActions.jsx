@@ -45,7 +45,8 @@ export default function PostActions(props) {
     var rows = [];
 
     for (var i = 0; i < responses.length; i++) {
-        const post = <Response author="Joe" content={responses[i]} />
+        var date = new Date(responses[i].time).toLocaleString('en-US', { year: 'numeric', month: 'long', day: 'numeric', hour12: true, hour: "numeric", minute: "numeric" });
+        const post = <Response author="Anonymous" time={date} content={responses[i].content} />
         const elm = <li className={classes.responses}>
             {post}
         </li>
