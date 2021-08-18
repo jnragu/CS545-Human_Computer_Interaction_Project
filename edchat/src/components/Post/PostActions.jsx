@@ -78,6 +78,14 @@ export default function PostActions(props) {
                     >
                         Add a Response
                     </Button>
+                    { responses.length == 0 &&
+                        <Typography 
+                            variant='button'
+                            className={classes.viewResponses}
+                        >
+                            No Responses
+                        </Typography>
+                    }
                     { responses.length == 1 && 
                         <Typography 
                             variant='button' 
