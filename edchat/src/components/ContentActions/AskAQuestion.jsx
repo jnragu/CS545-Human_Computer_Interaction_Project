@@ -1,5 +1,15 @@
 import React from 'react'
-import { Card, CardHeader, TextField, CardContent, Button, CardActions } from '@material-ui/core'
+import { Card, 
+        CardHeader, 
+        TextField, 
+        CardContent, 
+        Button, 
+        CardActions, 
+        FormControl,
+        Select,
+        MenuItem,
+        InputLabel
+} from '@material-ui/core'
 import { AskQuestion } from '../Post/PostFunctions.js'
 import { withStyles } from '@material-ui/styles';
 import { GetAllCourses } from '../Post/PostFunctions.js';
@@ -7,6 +17,10 @@ import { GetAllCourses } from '../Post/PostFunctions.js';
 const styles = theme => ({
     root: {
         width: '500px'
+    },
+    formControl: {
+        minWidth: 150,
+        marginLeft: theme.spacing(2),
     }
 });
 
@@ -41,10 +55,11 @@ class AskAQuestion extends React.Component {
 
             this.setState({ "selectedCourse": AllCourses[0].data.course_id });
 
-            var courses = AllCourses.map((course, index) => (
+            var courses = AllCourses.map((course, index) => course.data.course_id)
+/*             var courses = AllCourses.map((course, index) => (
                 <option value={course.data.course_id}>{course.data.course_id}</option>
 
-            ))
+            )) */
 
             this.setState({ "options": courses });
         }.bind(this));
@@ -57,7 +72,13 @@ class AskAQuestion extends React.Component {
         var title;
         var content;
 
-
+        let dropDownItems = []
+        this.state.options.forEach((course, index) => {
+            dropDownItems.push( 
+                <MenuItem value={course}>{course}</MenuItem>
+            )
+        })
+        console.log(this.state.options)
 
         const handleClick = function (event) {
             var course = this.state.selectedCourse;
@@ -103,9 +124,20 @@ class AskAQuestion extends React.Component {
                         defaultValue="Anonymous"
                     />
                 </CardContent>
-                <select name="selectList" id="selectList" className={classes.dropDown} onChange={handleChangeCourse} style={{ marginLeft: '15px' }}>
+                <FormControl 
+                    variant='outlined'
+                    className={classes.formControl}
+                >
+                    <InputLabel>
+                        Class
+                    </InputLabel>
+                    <Select id='selectList'>
+                        {dropDownItems}
+                    </Select>
+                </FormControl>
+{/*                 <select name="selectList" id="selectList" className={classes.dropDown} onChange={handleChangeCourse} style={{ marginLeft: '15px' }}>
                     {this.state.options}
-                </select>
+                </select> */}
                 <CardHeader
                     title={
                         <TextField
