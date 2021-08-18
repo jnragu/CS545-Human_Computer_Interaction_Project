@@ -10,6 +10,7 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import randomColor from 'randomcolor'
 
 const drawerWidth = 270;
 
@@ -39,10 +40,6 @@ const styles = theme => ({
     }
 })
 
-
-
-
-
 class SideBar extends React.Component {
     constructor(props) {
         super(props);
@@ -67,7 +64,8 @@ class SideBar extends React.Component {
 
     handleSubmit() {
         if (this.courseName && this.courseID) {
-            var res = CreateCourse(this.courseName, this.courseID);
+            var courseColor = randomColor()
+            var res = CreateCourse(this.courseName, this.courseID, courseColor);
             res.then(function () {
                 window.location.reload();
             });
@@ -93,7 +91,11 @@ class SideBar extends React.Component {
             var courses = AllCourses.map((course) => (
 
                 <li key={course.id} className={classes.courses}>
-                    <SideBarItem class={course.data.course_name} classid={course.data.course_id} style={{ cursor: 'pointer' }} />
+                    <SideBarItem 
+                        class={course.data.course_name} 
+                        classid={course.data.course_id} 
+                        classColor = {course.data.course_color}
+                    />
                 </li>
 
             ))

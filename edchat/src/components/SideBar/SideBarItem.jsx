@@ -4,19 +4,15 @@ import { FiberManualRecord } from '@material-ui/icons'
 
 const useStyles = makeStyles(theme => ({
     grid: {
-        direction: 'row',
-        justifyContent: 'flex-start',
-        alignItems: 'center',
-        margin: '15px',
-
+        padding: theme.spacing(1)
     },
     icon: {
         marginRight: '8px',
         marginTop: '2px'
     },
     classid: {
-        marginTop: '2px'
-    }
+        marginTop: theme.spacing(.5)
+    },
 }))
 
 export default function SideBarItem(props) {
@@ -27,13 +23,41 @@ export default function SideBarItem(props) {
     }
     const classes = useStyles()
     return (
-        <Container onClick={handleClick}>
-            <Grid container className={classes.grid}>
-                <Grid item className={classes.icon}>
-                    <FiberManualRecord fontSize='small' />
+        <Container>
+            <Button
+                variant='text'
+                startIcon={<FiberManualRecord fontSize='small' 
+                style={{color: props.classColor }}/>}
+                onClick={handleClick}
+            >
+                <Grid 
+                    container
+                    direction='column'
+                    justifyContent='flex-start'
+                    className={classes.grid}
+                >
+                    <Grid item>
+                        <Typography 
+                        variant='h2' 
+                        style={{color: props.classColor}}
+                        align='left'
+                        >
+                            {props.class}
+                        </Typography>
+                    </Grid>
+                    <Grid item>
+                        <Typography 
+                            variant='h3' 
+                            style={{color: props.classColor}}
+                            align='left'
+                            className={classes.classid}
+                        >
+                            {props.classid}
+                        </Typography>
+                    </Grid>
                 </Grid>
-                <Grid item>
-                    <button style={{
+            </Button>
+{/*                     <button style={{
                         cursor: 'pointer', background: 'none',
                         border: 'none',
                         padding: '0',
@@ -48,9 +72,7 @@ export default function SideBarItem(props) {
                         <Typography variant='h3' className={classes.classid} style={{ cursor: 'pointer' }}>
                             {props.classid}
                         </Typography>
-                    </button>
-                </Grid>
-            </Grid>
+                    </button> */}
         </Container>
     )
 }

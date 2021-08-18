@@ -65,10 +65,11 @@ async function GetAllCourses() {
 
 //Create a brand new course in the database.
 //Initialize responses to empty array.
-function CreateCourse(course_name, course_id){
+function CreateCourse(course_name, course_id, course_color){
     var response = db.collection("courses").add({
         "course_name": course_name,
-        "course_id": course_id
+        "course_id": course_id,
+        "course_color": course_color
     });
     return response;
 }
