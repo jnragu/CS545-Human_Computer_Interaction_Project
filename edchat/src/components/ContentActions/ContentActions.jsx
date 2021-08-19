@@ -35,14 +35,14 @@ export default function ContentActions() {
         <Grid container className={classes.root}>
 
             <Grid item>
-                <Button
+{/*                 <Button
                     startIcon={<AddBox />}
                     variant='contained'
                     color='primary'
                     onClick={handleClick}
                 >
                     Ask a Question
-                </Button>
+                </Button> */}
                 <Dialog
                     id={id}
                     open={open}

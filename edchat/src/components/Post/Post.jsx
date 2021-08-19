@@ -10,14 +10,15 @@ import { spacing } from '@material-ui/system'
 
 const styles = theme => ({
     root: {
-        maxWidth: 'sm',
+        maxWidth: 'lg',
         listStyleType: 'none',
     },
     card: {
-        marginTop: '1px'
+        marginTop: '1px',
     },
     listStyle: {
-        listStyleType: 'none'
+        listStyleType: 'none',
+        maxWidth: '750px'
     }
 })
 
