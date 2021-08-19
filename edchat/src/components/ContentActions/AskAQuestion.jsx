@@ -7,6 +7,7 @@ import { Card,
         CardActions, 
         FormControl,
         Select,
+        Menu,
         MenuItem,
         InputLabel
 } from '@material-ui/core'
@@ -55,13 +56,13 @@ class AskAQuestion extends React.Component {
 
             this.setState({ "selectedCourse": AllCourses[0].data.course_id });
 
-            var courses = AllCourses.map((course, index) => course.data.course_id)
-/*             var courses = AllCourses.map((course, index) => (
-                <option value={course.data.course_id}>{course.data.course_id}</option>
-
-            )) */
-
-            this.setState({ "options": courses });
+            var courses = AllCourses.map((course) => course.data.course_id)
+            
+            var coursesDict = {}
+            AllCourses.map((course) => coursesDict[course.data.course_id] = course.data.course_color)
+            
+            this.setState({ 'options': courses });
+            this.setState({ 'courseColors': coursesDict})
         }.bind(this));
     }
 
@@ -72,10 +73,14 @@ class AskAQuestion extends React.Component {
         var title;
         var content;
 
+        this.state.anchorEl = null
+
         let dropDownItems = []
         this.state.options.forEach((course, index) => {
             dropDownItems.push( 
-                <MenuItem value={course}>{course}</MenuItem>
+                <MenuItem value={course}>
+                    {course}
+                </MenuItem>
             )
         })
         console.log(this.state.options)
@@ -87,17 +92,18 @@ class AskAQuestion extends React.Component {
             }
             else {
                 var date = new Date().getTime()
+                var color = this.state.courseColors[course]
                 if (!name) {
                     name = "Anonymous"
                 }
-                var res = AskQuestion(name, course, title, content, date);
+                var res = AskQuestion(name, course, title, content, date, color);
                 res.then(function () {
                     window.location.reload();
                 });
             }
 
         }.bind(this);
-
+        
         const handleChangeTitle = function (event) {
             title = event.target.value;
         }
@@ -131,13 +137,10 @@ class AskAQuestion extends React.Component {
                     <InputLabel>
                         Class
                     </InputLabel>
-                    <Select id='selectList'>
+                    <Select id='selectList' onChange={handleChangeCourse}>
                         {dropDownItems}
                     </Select>
                 </FormControl>
-{/*                 <select name="selectList" id="selectList" className={classes.dropDown} onChange={handleChangeCourse} style={{ marginLeft: '15px' }}>
-                    {this.state.options}
-                </select> */}
                 <CardHeader
                     title={
                         <TextField

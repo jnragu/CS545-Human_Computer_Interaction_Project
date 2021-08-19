@@ -36,9 +36,17 @@ class Post extends React.Component {
         var date = new Date(post.data.date).toLocaleString('en-US', { year: 'numeric', month: 'long', day: 'numeric', hour12: true, hour: "numeric", minute: "numeric" });
         return (
             <Card className={classes.listStyle}>
-                <PostHeader author={<PostAuthor time={date} author={post.data.name} />} title={post.data.question} />
+                <PostHeader 
+                    author={<PostAuthor time={date} author={post.data.name} />} 
+                    title={post.data.question} 
+                    color={post.data.course_color}
+                    courseid={post.data.courseid}
+                />
                 <PostContent content={post.data.content} />
-                <PostActions responses={post.data.responses} postid={post.id} />
+                <PostActions 
+                    responses={post.data.responses} 
+                    postid={post.id} 
+                />
             </Card>
         )
 

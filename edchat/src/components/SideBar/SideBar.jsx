@@ -81,7 +81,7 @@ class SideBar extends React.Component {
         this.courseID = event.target.value;
     }
 
-
+x
     componentWillMount() {
         const promise = GetAllCourses();
         const { classes } = this.props;

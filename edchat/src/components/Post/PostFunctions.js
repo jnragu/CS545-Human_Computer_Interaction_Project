@@ -42,14 +42,15 @@ function Respond(id, response){
 
 //Create a brand new question in the database.
 //Initialize responses to empty array.
-function AskQuestion(name, course, question, content, date){
+function AskQuestion(name, course, question, content, date, color){
     var response = db.collection("post").add({
         "name": name,
         "courseid": course,
         "question": question,
         "content": content,
         "date": date,
-        "responses": [] 
+        "responses": [],
+        'course_color': color
     });
     return response;
 }

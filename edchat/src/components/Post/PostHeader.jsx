@@ -1,6 +1,5 @@
 import React from 'react'
 import { makeStyles, Grid, Typography, Button, CardHeader } from '@material-ui/core'
-import PostAuthor from './PostAuthor'
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -9,7 +8,9 @@ const useStyles = makeStyles(theme => ({
         alignItems: 'flex-start',
     },
     tag: {
-        marginTop: '10px'
+        padding: theme.spacing(1),
+        marginTop: theme.spacing(1),
+        marginRight: theme.spacing(1)
     }
 }))
 
@@ -26,13 +27,18 @@ export default function PostHeader(props) {
                 subheader={props.author}
             />
             <Button
-                variant='contained'
+                variant='outlined'
                 className={classes.tag}
-                color='primary'
+                style={{ 
+                    color: props.color,
+                    borderColor: props.color 
+                }}
                 disableElevation
             >
-                <Typography variant='button'>
-                    Tag
+                <Typography 
+                    variant='button'
+                >
+                    {props.courseid}
                 </Typography>
             </Button>
         </Grid>
