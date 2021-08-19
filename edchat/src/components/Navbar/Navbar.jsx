@@ -63,6 +63,18 @@ export default function Navbar() {
                         Stevens Institute of Technology
                     </Typography>
                 </Tooltip>
+                <TextField
+                    variant='outlined'
+                    label='Search'
+                    InputProps={{
+                        endAdornment: (
+                            <InputAdornment position='end'>
+                                <Search fontSize='small' />
+                            </InputAdornment>
+                        )
+                    }}
+                    className={classes.search}
+                />
                 <div className={classes.actions}>
                     <IconButton
                         onClick={handleClick}
