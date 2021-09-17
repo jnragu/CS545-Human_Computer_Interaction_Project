@@ -1,5 +1,5 @@
 import React, { Component, useState } from 'react'
-import { makeStyles, Button, Grid, TextField, InputAdornment, Popover, Typography, Dialog, DialogTitle, DialogContent, Tooltip } from '@material-ui/core'
+import { makeStyles, Button, Grid, TextField, InputAdornment, Dialog, DialogTitle, DialogContent, Tooltip } from '@material-ui/core'
 import { Search, AddBox } from '@material-ui/icons'
 import AskAQuestion from './AskAQuestion'
 import CloseOutlinedIcon from '@material-ui/icons/CloseOutlined';
